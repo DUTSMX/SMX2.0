@@ -13,4 +13,7 @@ router.get('/student_detail',function(req,res,next){
 router.get('/student',function(req,res,next){
   res.render('student_course');
 });
+router.get('/course_re',function(req,res,next){
+    res.render('course_re')
+});
 module.exports = router;

@@ -22,10 +22,12 @@
     <div class="content">
         <div class="s-left">
             <div class="guide"><a href="/student">我的课程</a></div>
-            <div class="guide"><a href="#">推荐课程</a></div>
+            <div class="guide"><a href="/course_re">推荐课程</a></div>
             <div class="guide"><a href="/student_detail">个人资料</a></div>
         </div>
+
         <div class="s-right">
+
             <div class="right-guide" id="right-guide">
                 <ul>
                     <li><a href="#">全部</a></li>
@@ -114,4 +116,7 @@
             }
         }
     }
+    router.get('/course_recommened',function (req,res) {
+        res.render('course_recommened',{})
+    })
 </script>

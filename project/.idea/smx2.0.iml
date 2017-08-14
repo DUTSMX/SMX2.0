@@ -4,7 +4,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Node.js v8.1.3 Core Modules" level="application" />
-    <orderEntry type="library" name="smx2.0 node_modules" level="project" />
+    <orderEntry type="library" name="project node_modules" level="project" />
   </component>
 </module>
