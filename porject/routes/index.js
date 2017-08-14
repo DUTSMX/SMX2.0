@@ -7,10 +7,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/student_detail',function(req,res,next){
-  res.render('student_detail')
+  res.render('student_detail');
 });
 
 router.get('/student',function(req,res,next){
-  res.render('student_course')
+  res.render('student_course');
 });
 module.exports = router;
