@@ -137,8 +137,11 @@
                             <label>时间</label>
                             <input type="text" placeholder="请输入年/月/日" />
                         </form>
+                        <!--<div class="submit">-->
+                            <!--<input type="submit" />-->
+                        <!--</div>-->
                         <div class="submit">
-                            <input type="submit" />
+                            <input value="提交申请" type="submit" onclick="postHope()"></input>
                         </div>
                     </div>
                 </div>
@@ -148,6 +151,28 @@
 </div>
 </body>
 <script>
+
+    function postHope() {
+        var data = {
+            templateId:selectId,
+            studentId:studentId,
+            //subjectName:$("#subjectName").val(),
+            //teacher:$('#chooseTeacher').val(),
+            classType:$("#classType").val(),
+            time:$("#time").val(),
+            other:$("#other").val()
+        }
+        $.post("postHope",data,function (data) {
+            if (data.status){
+                location.reload()
+                console.log("申请失败");
+            }else {
+                alert(data.desc)
+                console.log("申请失败");
+            }
+        })
+    }
+
     function $(id) {
         return typeof id === 'string' ? document.getElementById(id) : id;
     }
