@@ -154,6 +154,18 @@ router.get('/notstartCourse',function (req, res, next) {
 router.get('/course_re',function(req,res,next){
     res.render('course_re');
 });
+<<<<<<< HEAD
 
 
+=======
+router.get('/teacher',function(req,res,next){
+    res.render('teacher_course')
+});
+router.get('/teacher_detail',function(req,res,next){
+    res.render('teacher_detail')
+});
+router.get('/teacher_re',function(req,res,next){
+    res.render('teacher_re')
+});
+>>>>>>> ca96811be2096935089b3e480d12c28643cc93e6
 module.exports = router;
