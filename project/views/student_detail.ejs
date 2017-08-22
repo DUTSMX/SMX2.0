@@ -11,8 +11,8 @@
     <div class="header">
         <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
         <div class="headpassage">
-            <p1>易婷</p1><br>
-            <p2>个性签名：欢迎来到尚名校，welcome to SMX</p2>
+            <p1><%=data.userName%></p1><br>
+            <p2>个性签名：<%=data.personalSign%></p2>
         </div>
         <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
     </div>
@@ -27,10 +27,10 @@
         <div class="back212">
             <div class="ziliao">
                 <ul>
-                    <li>学生姓名：易婷</li>
-                    <li>年龄：20</li>
-                    <li>学校：大连理工大学</li>
-                    <li>个性签名：欢迎来到尚名校！</li>
+                    <li>学生姓名：<%=data.userName%></li>
+                    <li>年龄：<%=data.userAge%></li>
+                    <li>学校：<%=data.school%></li>
+                    <li>个性签名：<%=data.personalSign%></li>
 
                 </ul>
             </div>
