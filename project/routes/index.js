@@ -151,13 +151,22 @@ router.get('/notstartCourse',function (req, res, next) {
         })
     })
 })
-router.get('/course_re',function(req,res,next){
-    res.render('course_re');
-});
-<<<<<<< HEAD
+/*课程推荐
+* req:
+* res:{allCourse:[]}
+* */
+router.get('/course_re',function (req,res,next) {
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
+        "FROM courseSeries c " +
+        "JOIN account a ON c.courseSeriesTeacher = a.userId "+
+        "order by userName,time";
+    console.log("sql" + sql);
+    db.sequelize.query(sql).then(function (data) {
+        console.log("course:"+JSON.stringify(data[0]))
+        res.render('course_re',{AllCourse:data[0]});
+    })
+})
 
-
-=======
 router.get('/teacher',function(req,res,next){
     res.render('teacher_course')
 });
@@ -167,5 +176,8 @@ router.get('/teacher_detail',function(req,res,next){
 router.get('/teacher_re',function(req,res,next){
     res.render('teacher_re')
 });
->>>>>>> ca96811be2096935089b3e480d12c28643cc93e6
+
+
+
+
 module.exports = router;
