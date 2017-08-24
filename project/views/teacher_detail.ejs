@@ -4,17 +4,17 @@
     <title>尚名校</title>
     <link rel='stylesheet' href='/stylesheets/style.css'>
     <link rel="stylesheet" href="stylesheets/details.css">
+
 </head>
 <body>
 <%include navigation.ejs%>
 <div class="head">
     <div class="header">
-        <div class="headphoto"><img src="img/headlogo.png" width="91px" height="88px"></div>
+        <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
         <div class="headpassage">
-
-            <p1 ><%=data.userName%></p1><br>
-            <p2 >成绩：95</p2><br>
-            <p2>住址：<%=data.userAddress%></p2>
+            <p1 >齐书强</p1><br>
+            <p2 >大连理工大学</p2><br>
+            <p2>18742597777</p2>
         </div>
         <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
     </div>
@@ -22,48 +22,48 @@
 <div class="main">
     <div class="content">
         <div class="s-left">
-            <div class="guide"><a href="/student">我的课程</a></div>
-            <div class="guide"><a href="/course_re">推荐课程</a></div>
-            <div class="guide"><a  href="/student_detail">个人资料</a></div>
+            <div class="guide"><a href="/teacher">我的课程</a></div>
+            <div class="guide"><a href="/teacher_re">推荐课程</a></div>
+            <div class="guide"><a href="/teacher_detail">个人资料</a></div>
         </div>
 
         <div class="back212">
             <div class="ziliao" id="info" style="display: block">
                 <ul>
-
-                    <li >姓名：<%=data.userName%></li>
-                    <li>年级：<%=data.grade%></li>
-                    <li>学校：<%=data.school%></li>
-                    <li>联系方式：<%=data.phoneNumber%></li>
-                    <li >住址：<%=data.userAddress%></li>
-                </ul>
-            </div>
-        <form action="#" method="post">
-            <div class="ziliao" id="reinfo" style="display: block">
-
-                <ul>
-                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-name" placeholder="请输入姓名" /></li>
-                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-class" placeholder="请输年级" /></li>
-                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-school" placeholder="请输入学校" /></li>
-                    <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="LoginForm_phone"  type="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-address" placeholder="请输入住址" /></li>
+                    <li >姓名：齐书强</li>
+                    <li>年级：高中三年级</li>
+                    <li>学校：大连理工大学</li>
+                    <li>联系方式：18742598888</li>
+                    <li >住址：辽宁省大连市金州区</li>
 
                 </ul>
-
             </div>
-            <div class="photo">
-                <div class="img">
-                    <img src="img/touxiang.png" width="100px">
+            <form action="#" method="post">
+                <div class="ziliao" id="reinfo" style="display: block">
+
+                    <ul>
+                        <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输入姓名" /></li>
+                        <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输年级" /></li>
+                        <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输入学校" /></li>
+                        <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="LoginForm_phone"  type="text" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                        <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输入住址" /></li>
+
+                    </ul>
+
                 </div>
-            </div>
+                <div class="photo">
+                    <div class="img">
+                        <img src="img/touxiang.png" width="100px">
+                    </div>
+                </div>
 
-            <div class="pbutton12" id="revise" >
-                <button class="button button2"  type="button" >修&nbsp改</button>
-            </div>
-            <div class="pbutton12" id="save" style="display: none">
-                <input class="button button2"  type="submit" value="保 存">
-            </div>
-        </form>
+                <div class="pbutton12" id="revise" >
+                    <button class="button button2"  type="button" >修&nbsp改</button>
+                </div>
+                <div class="pbutton12" id="save" style="display: none">
+                    <input class="button button2"  type="submit" value="保 存">
+                </div>
+            </form>
             <div class="line1">
                 <div class="line"></div>
             </div>
@@ -76,8 +76,8 @@
             <div class="idlogin">
 
                 <li>注册身份信息</li>
-                <div class="idphoto1"><img src="img/headlogo.png"></div>
-                <div class="idphoto2"><img src="img/headlogo.png"></div>
+                <div class="idphoto1"><img src="img/bridge.png"></div>
+                <div class="idphoto2"><img src="img/bridge.png"></div>
             </div>
 
         </div>
@@ -93,14 +93,12 @@
 
         $("#reinfo").hide();
         $("#revise").click(function(){
-
-            $("#info").fadeOut(1000);
-            $("#reinfo").fadeIn(1000);
-            $("#revise").fadeOut(1000);
-            $("#save").fadeIn(1000);
+            $("#info").hide();
+            $("#reinfo").show();
+            $("#revise").hide();
+            $("#save").show();
         });
     });
-
     router.get('/course_recommened',function (req,res) {
         res.render('course_recommened',{})
     })
@@ -145,7 +143,7 @@
             document.getElementById("submit").disabled = false;
         }
         else {
-            alert("输入格式不对，请重新输入");
+            alert("联系方式输入格式不对，请重新输入");
 
         }
     }
@@ -174,23 +172,6 @@
             obj.value = "";
         if(parseFloat(obj.value)<0)
             obj.value="";
-    }
-    function editInfo(){
-        var data = {
-            //userHeadUrl:headUrl,
-            //userFrontIdHeadUrl:frontUrl,
-            //userBackIdHeadUrl:backUrl,
-            userName:$("#person-name").val(),
-            grade:$("#person-grade").val(),
-            school:$("#person-school").val(),
-            phoneNumber:$("#person-phoneNumber").val(),
-            address:$("#person-address").val(),
-        }
-        console.log("data:"+JSON.stringify(data))
-        jQuery.post("./editInfo",data,function (ret) {
-            console.log(JSON.stringify(ret));
-            location.reload();
-        })
     }
 
 </script>

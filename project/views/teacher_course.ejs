@@ -11,9 +11,9 @@
     <div class="header">
         <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
         <div class="headpassage">
-            <p1>易婷</p1>
+            <p1>齐书强</p1>
             <br>
-            <p2>个性签名：欢迎来到尚名校，welcome to SMX</p2>
+            <p2>大连理工大学</p2>
         </div>
         <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
     </div>
@@ -21,96 +21,75 @@
 <div class="main">
     <div class="content">
         <div class="s-left">
-            <div class="guide"><a href="/student">我的课程</a></div>
-            <div class="guide"><a href="/course_re">推荐课程</a></div>
-            <div class="guide"><a href="/student_detail">个人资料</a></div>
+            <div class="guide"><a href="/teacher">我的课程</a></div>
+            <div class="guide"><a href="/teacher_re">推荐课程</a></div>
+            <div class="guide"><a href="/teacher_detail">个人资料</a></div>
         </div>
 
         <div class="s-right">
 
             <div class="right-guide" id="right-guide">
                 <ul>
-                    <li><a href="allCourse">全部</a></li>
-                    <li><a href="/finishCourse">已完成</a></li>
-                    <li><a href="/nowCourse">进行中</a></li>
-                    <li><a href="/notstartCourse">未开始</a></li>
+                    <li><a href="#">已完成</a></li>
+                    <li><a href="#">进行中</a></li>
+                    <li><a href="#">申请中</a></li>
                 </ul>
             </div>
 
             <div class="right-content" id="right-content">
 
-
                 <div class="mod">
-                    <div>
-                        <%if(AllCourse.length == 0){%>
-                        <%}AllCourse.forEach(function (item) { %>
-                    </div>
                     <div class="box">
                         <img src="img/picture.jpg"/>
 
-                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
+                        <div class="course-title"><a>圆锥曲线</a></div>
+                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>齐书强老师</a>
                         </div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                         <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
                     </div>
-                    <%})%>
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+
+                        <div class="course-title"><a>等比函数</a></div>
+                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>齐书强老师</a>
+                        </div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                    </div>
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+
+                        <div class="course-title"><a>霍夫曼树</a></div>
+                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>姜国海老师</a>
+                        </div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                    </div>
                 </div>
-
-
                 <div class="mod" style="display:none">
-                    <div>
-                        <%if(FinishCourse.length == 0){%>
-                        <%}FinishCourse.forEach(function (item) { %>
-                    </div>
                     <div class="box">
                         <img src="img/picture.jpg"/>
-                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
+
+                        <div class="course-title"><a>圆锥曲线</a></div>
+                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>齐书强老师</a>
                         </div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                         <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
                     </div>
-                    <%})%>
+
                 </div>
 
-                <div class="mod" style="display:none">
-                    <div>
-                        <%if(NowCourse.length == 0){%>
-                        <%}NowCourse.forEach(function (item) { %>
-                    </div>
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
-                    <%})%>
-                </div>
+                <div class="mod" style="display:none"></div>
 
+                <div class="mod" style="display:none"></div>
 
-                <div class="mod" style="display:none">
-                    <div>
-                        <%if(NotCourse.length == 0){%>
-                        <%}NotCourse.forEach(function (item) { %>
-                    </div>
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
-                 <%})%>
-                </div>
-        </div>
             </div>
         </div>
     </div>
