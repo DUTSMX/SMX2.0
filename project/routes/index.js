@@ -14,30 +14,29 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/student_detail',function(req,res,next){
-
-  res.render('student_detail');
-
-    /*student.findOne({'where':{userId:34}}).then(function (ret) {
-        ret.getUser().then(function (ret1) {
-            console.log(JSON.stringify({info:ret1,infos:ret}))
-            res.render('student_detail',{info:ret1,infos:ret});
-        })
-    })*/
     var studentId = 16;
-    var sql = "SELECT a.userName, " +
-        "a.userAge, " +
-        "s.school, " +
-        "s.personalSign " +
+    var sql = "SELECT a.userName ,a.userAge ,s.school ,s.grade ,s.personalSign ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
         "FROM  student s " +
         "JOIN account a ON a.userId = s.userId  " +
         "WHERE s.studentId = " + studentId;
     db.sequelize.query(sql).then(function (ret) {
         console.log(JSON.stringify(ret));
-        console.log(JSON.stringify({date:ret[0][0]}));
+        console.log(JSON.stringify({data:ret[0][0]}));
         res.render('student_detail',{data:ret[0][0]});
     })
 });
-
+router.get('/teacher_detail',function(req,res,next){
+    var teacherId = 37;
+    var sql = "SELECT t.class, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
+        "FROM  teacher t " +
+        "JOIN account a ON a.userId = t.userId  " +
+        "WHERE t.teacherId = " + teacherId;
+    db.sequelize.query(sql).then(function (ret) {
+        console.log(JSON.stringify(ret));
+        console.log(JSON.stringify({data:ret[0][0]}));
+        res.render('teacher_detail',{data:ret[0][0]});
+    })
+});
 router.get('/student',function(req,res,next){
     var studentId = 34;
     student.findOne({'where':{studentId:34}}).then(function (student) {
@@ -176,6 +175,36 @@ router.get('/teacher_detail',function(req,res,next){
 router.get('/teacher_re',function(req,res,next){
     res.render('teacher_re')
 });
+router.post("/editInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+        userAddress:req.body.address,
+    },{'where':{userId:34}}).then(function (data) {
+        student.update({
+            grade:req.body.grade,
+            school:req.body.school
+        },{'where':{userId:34}}).then(
+            res.send("123")
+        )
+    })
+})
+router.post("/changeInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+        userAddress:req.body.address,
+    },{'where':{userId:87}}).then(function (data) {
+        student.update({
+            grade:req.body.grade,
+            school:req.body.school
+        },{'where':{userId:87}}).then(
+            res.send("123")
+        )
+    })
+})
 
 
 
