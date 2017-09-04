@@ -12,9 +12,9 @@
     <div class="header">
         <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
         <div class="headpassage">
-            <p1 >齐书强</p1><br>
-            <p2 >大连理工大学</p2><br>
-            <p2>18742597777</p2>
+            <p1 ><%=data.userName%></p1><br>
+            <p2 ><%=data.college%></p2><br>
+            <p2><%=data.phoneNumber%></p2>
         </div>
         <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
     </div>
@@ -30,11 +30,11 @@
         <div class="back212">
             <div class="ziliao" id="info" style="display: block">
                 <ul>
-                    <li >姓名：齐书强</li>
-                    <li>年级：高中三年级</li>
-                    <li>学校：大连理工大学</li>
-                    <li>联系方式：18742598888</li>
-                    <li >住址：辽宁省大连市金州区</li>
+                    <li >姓名：<%=data.userName%></li>
+                    <li>年级：<%=data.class%></li>
+                    <li>学校：<%=data.college%></li>
+                    <li>联系方式：<%=data.phoneNumber%></li>
+                    <li >住址：<%=data.userAddress%></li>
 
                 </ul>
             </div>
@@ -42,11 +42,11 @@
                 <div class="ziliao" id="reinfo" style="display: block">
 
                     <ul>
-                        <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输入姓名" /></li>
-                        <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输年级" /></li>
-                        <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输入学校" /></li>
-                        <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="LoginForm_phone"  type="text" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                        <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" placeholder="请输入住址" /></li>
+                        <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="请输入姓名" /></li>
+                        <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="请输年级" /></li>
+                        <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="请输入学校" /></li>
+                        <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="person-phoneNumber"  maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                        <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="请输入住址" /></li>
 
                     </ul>
 
@@ -61,7 +61,7 @@
                     <button class="button button2"  type="button" >修&nbsp改</button>
                 </div>
                 <div class="pbutton12" id="save" style="display: none">
-                    <input class="button button2"  type="submit" value="保 存">
+                    <p class="button button2" onclick="changeInfo()">保 存</p>
                 </div>
             </form>
             <div class="line1">
@@ -172,6 +172,20 @@
             obj.value = "";
         if(parseFloat(obj.value)<0)
             obj.value="";
+    }
+    function changeInfo(){
+        var data = {
+            userName:$("#person-name").val(),
+            grade:$("#person-grade").val(),
+            school:$("#person-school").val(),
+            phoneNumber:$("#person-phoneNumber").val(),
+            address:$("#person-address").val(),
+        }
+        console.log("data:"+JSON.stringify(data))
+        jQuery.post("./changeInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+            location.reload();
+        })
     }
 
 </script>

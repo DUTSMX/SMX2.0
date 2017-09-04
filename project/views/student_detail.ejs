@@ -42,11 +42,11 @@
             <div class="ziliao" id="reinfo" style="display: block">
 
                 <ul>
-                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-name" placeholder="请输入姓名" /></li>
-                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-class" placeholder="请输年级" /></li>
-                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-school" placeholder="请输入学校" /></li>
-                    <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="LoginForm_phone"  type="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="person-address" placeholder="请输入住址" /></li>
+                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="请输入姓名" /></li>
+                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-class" placeholder="请输年级" /></li>
+                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="请输入学校" /></li>
+                    <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="请输入住址" /></li>
 
                 </ul>
 
@@ -176,20 +176,18 @@
             obj.value="";
     }
     function editInfo(){
+
         var data = {
-            //userHeadUrl:headUrl,
-            //userFrontIdHeadUrl:frontUrl,
-            //userBackIdHeadUrl:backUrl,
             userName:$("#person-name").val(),
             grade:$("#person-grade").val(),
             school:$("#person-school").val(),
             phoneNumber:$("#person-phoneNumber").val(),
-            address:$("#person-address").val(),
+            address:$("#person-address").val()
         }
-        console.log("data:"+JSON.stringify(data))
+        console.log("data1:"+JSON.stringify(data))
         jQuery.post("./editInfo",data,function (ret) {
             console.log(JSON.stringify(ret));
-            //location.reload();
+            location.reload();
         })
     }
 

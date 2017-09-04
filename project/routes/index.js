@@ -25,9 +25,24 @@ router.get('/student_detail',function(req,res,next){
         res.render('student_detail',{data:ret[0][0]});
     })
 });
+<<<<<<< HEAD
 /**
  * 我的课程
  */
+=======
+router.get('/teacher_detail',function(req,res,next){
+    var teacherId = 37;
+    var sql = "SELECT t.class, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
+        "FROM  teacher t " +
+        "JOIN account a ON a.userId = t.userId  " +
+        "WHERE t.teacherId = " + teacherId;
+    db.sequelize.query(sql).then(function (ret) {
+        console.log(JSON.stringify(ret));
+        console.log(JSON.stringify({data:ret[0][0]}));
+        res.render('teacher_detail',{data:ret[0][0]});
+    })
+});
+>>>>>>> b50e709765735c7b011d16385a4e436629a95f92
 router.get('/student',function(req,res,next){
     var studentId = 34;
     student.findOne({'where':{studentId:34}}).then(function (student) {
@@ -164,6 +179,19 @@ router.get('/course_re',function(req,res,next){
 * req:
 * res:{allCourse:[]}
 * */
+router.get('/teacher_re',function (req,res,next) {
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
+        "FROM courseSeries c " +
+        "JOIN account a ON c.courseSeriesTeacher = a.userId "+
+        "order by userName,time";
+    console.log("sql" + sql);
+    db.sequelize.query(sql).then(function (data) {
+        console.log("course:"+JSON.stringify(data[0]))
+        res.render('teacher_re',{AllCourse:data[0]});
+    })
+})
+
+
 router.get('/course_re',function (req,res,next) {
     var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
         "FROM courseSeries c " +
@@ -271,9 +299,12 @@ router.get('/teacher_postCourse',function (req, res, next) {
 router.get('/teacher_detail',function(req,res,next){
     res.render('teacher_detail')
 });
+<<<<<<< HEAD
 router.get('/teacher_re',function(req,res,next){
     res.render('teacher_re')
 });
+=======
+>>>>>>> b50e709765735c7b011d16385a4e436629a95f92
 
 router.post("/editInfo",function (req,res) {
     console.log(JSON.stringify(req.body))
@@ -286,6 +317,21 @@ router.post("/editInfo",function (req,res) {
             grade:req.body.grade,
             school:req.body.school
         },{'where':{userId:34}}).then(
+            res.send("123")
+        )
+    })
+})
+router.post("/changeInfo",function (req,res) {
+    console.log(JSON.stringify(req.body))
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+        userAddress:req.body.address,
+    },{'where':{userId:87}}).then(function (data) {
+        teacher.update({
+            class:req.body.grade,
+            college:req.body.school,
+        },{'where':{userId:87}}).then(
             res.send("123")
         )
     })

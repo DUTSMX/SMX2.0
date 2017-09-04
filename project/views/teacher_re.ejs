@@ -39,84 +39,23 @@
             <div class="right-content" id="right-content">
 
                 <div class="mod">
+
+                    <%if(AllCourse.length == 0){%>
+                    <%}AllCourse.forEach(function (item) { %>
+
                     <div class="box">
                         <img src="img/picture.jpg"/>
-                        <div class="course-title"><a>圆锥曲线</a></div>
-                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>齐书强老师</a>
+
+                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
+                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
                         </div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                         <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
                     </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>等比函数</a></div>
-                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>齐书强老师</a>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>霍夫曼树</a></div>
-                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>姜国海老师</a>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
+                    <%})%>
                 </div>
 
-                <div class="mod" style="display:none;">
-                    <div class="box" style="background:#CFE6E5;">
-                        <label>科目：</label>
-                        <select>
-                            <option>语文</option>
-                            <option>数学</option>
-                            <option>英语</option>
-                            <option>物理</option>
-                        </select>
-                        <label>年级：</label>
-                        <select>
-                            <option>高一</option>
-                            <option>高二</option>
-                            <option>高三</option>
-                        </select>
-                        <label>老师：</label>
-                        <select>
-                            <option>齐书强</option>
-                            <option>张三</option>
-                            <option>李四</option>
-                        </select>
-                    </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>等比函数</a></div>
-                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>齐书强老师</a>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>霍夫曼树</a></div>
-                        <div class="course-info"><a>教室2</a>&nbsp;&nbsp;&nbsp;<a>15:00-15:45</a>&nbsp;&nbsp;&nbsp;<a>姜国海老师</a>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
