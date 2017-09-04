@@ -40,23 +40,23 @@
 
             <div class="right-content" id="right-content">
 
-                <div class="mod">
-                    <div>
-                        <%if(AllCourse.length == 0){%>
-                        <%}AllCourse.forEach(function (item) { %>
-                    </div>
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
+                    <div class="mod">
+                        <div>
+                            <%if(AllCourse.length == 0){%>
+                            <%}AllCourse.forEach(function (item) { %>
                         </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                        <div class="box">
+                            <img src="img/picture.jpg"/>
+
+                            <div class="course-title"><a><%=item.courseSeriesName%></a></div>
+                            <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
+                            </div>
+                            <div class="pro-bac"></div>
+                            <div class="pro-fro"></div>
+                            <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                        </div>
+                        <%})%>
                     </div>
-                    <%})%>
-                </div>
                 <!--
                 <div class="mod">
                     <div class="box">
