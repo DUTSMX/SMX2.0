@@ -197,9 +197,9 @@ router.post("/changeInfo",function (req,res) {
         phoneNumber:req.body.phoneNumber,
         userAddress:req.body.address,
     },{'where':{userId:87}}).then(function (data) {
-        student.update({
-            grade:req.body.grade,
-            school:req.body.school
+        teacher.update({
+            class:req.body.grade,
+            college:req.body.school,
         },{'where':{userId:87}}).then(
             res.send("123")
         )
