@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>尚名校</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/details.css">
+    <link rel="stylesheet" href="stylesheets/admin.css">
+</head>
+<body>
+<% include navigation.ejs %>
+
+<div class="head">
+    <div class="header">
+        <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
+        <div class="headpassage">
+            <p1>齐书强</p1>
+            <br>
+            <p2>18742585736</p2>
+        </div>
+        <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="content">
+        <div class="s-left">
+            <div class="guide"><a href="/education">课程管理</a></div>
+            <div class="guide"><a href="/education_teacher">教师管理</a></div>
+            <div class="guide"><a href="/education_detail">个人信息</a></div>
+        </div>
+
+        <div class="s-right">
+            <div class="right-guide" id="right-guide">
+                <ul>
+                    <li><a href="#">课程列表</a></li>
+                    <li><a href="#">筛选课程</a></li>
+                    <li><a href="#">添加课程</a></li>
+                    <li><a href="#">课程审核</a></li>
+                </ul>
+            </div>
+            <div class="right-content" id="right-content">
+                <div class="mod">
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+
+                        <div class="course-title"><a>圆锥曲线</a></div>
+                        <div class="course-info"><a>10课时</a></div>
+                        <div class="course-info" style="margin-top:100px;"><a>高一</a></div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                    </div>
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+
+                        <div class="course-title"><a>等比函数</a></div>
+                        <div class="course-info"><a>8课时</a></div>
+                        <div class="course-info" style="margin-top:100px;"><a>高二</a></div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                    </div>
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+
+                        <div class="course-title"><a>霍夫曼树</a></div>
+                        <div class="course-info"><a>10课时</a></div>
+                        <div class="course-info" style="margin-top:100px;"><a>高三</a></div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                    </div>
+
+                </div>
+
+                <div class="mod" style="display:none;">
+                    <div class="box" style="background:#CFE6E5;">
+                        <label>科目：</label>
+                        <select>
+                            <option>语文</option>
+                            <option>数学</option>
+                            <option>英语</option>
+                            <option>物理</option>
+                        </select>
+                        <label>年级：</label>
+                        <select>
+                            <option>高一</option>
+                            <option>高二</option>
+                            <option>高三</option>
+                        </select>
+                    </div>
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+                        <div class="course-title"><a>圆锥曲线</a></div>
+                        <div class="course-info"><a>10课时</a></div>
+                        <div class="course-info" style="margin-top:100px;"><a>高一</a></div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                    </div>
+
+                    <div class="box">
+                        <img src="img/picture.jpg"/>
+
+                        <div class="course-title"><a>圆锥曲线</a></div>
+                        <div class="course-info"><a>10课时</a></div>
+                        <div class="course-info" style="margin-top:100px;"><a>高一</a></div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                    </div>
+                </div>
+
+                <div class="mod" style="border:1px solid transparent; display:none;">
+                    <div class="basic">
+                        <div class="basic-title"><span>基本信息</span></div>
+                        <form>
+                            <label>名称</label>
+                            <input type="text" />
+                        </form>
+                        <form>
+                            <label>年级</label>
+                            <input type="text" />
+                        </form>
+                        <form>
+                            <label>课时</label>
+                            <input type="text" />
+                        </form>
+                        <label><span>介绍</span></label>
+                        <form style="margin-left:20px;">
+                            <textarea rows="8" cols="36"></textarea>
+                        </form>
+                    </div>
+
+                    <div class="course">
+                        <div class="basic-title"><span>课时内容</span></div>
+                        <form>
+                            <label>课时一</label>
+                            <input type="text" placeholder="年/月/日"/>
+                        </form>
+                        <form>
+                            <label>课时二</label>
+                            <input type="text" placeholder="年/月/日"/>
+                        </form>
+                        <form>
+                            <label>课时三</label>
+                            <input type="text" placeholder="年/月/日"/>
+                        </form>
+                        <input class="sub" type="submit">
+                    </div>
+                </div>
+
+                <div class="mod" style="display:none;">
+                    <div style="background:white; height:500px; padding-top:40px;">
+                        <table>
+                            <tbody>
+                            <tr style="background:#BCC6F6;">
+                                <td>序号</td>
+                                <td>加盟店名</td>
+                                <td>申请学生数</td>
+                                <td>开设年级</td>
+                                <td>课程名</td>
+                                <td style="width:150px;"></td>
+                            </tr>
+                            <tr>
+                                <td>001</td>
+                                <td>台安店</td>
+                                <td>5人</td>
+                                <td>高一</td>
+                                <td>三角函数</td>
+                                <td>
+                                    <button class="agree">同意</button>
+                                    <button class="disagree">驳回</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td>大连店</td>
+                                <td>7人</td>
+                                <td>高二</td>
+                                <td>立体几何</td>
+                                <td>
+                                    <button class="agree">同意</button>
+                                    <button class="disagree">驳回</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td>沈阳店</td>
+                                <td>3人</td>
+                                <td>高三</td>
+                                <td>函数导数</td>
+                                <td>
+                                    <button class="agree">同意</button>
+                                    <button class="disagree">驳回</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function $(id) {
+        return typeof id === 'string' ? document.getElementById(id) : id;
+    }
+    window.onload = function () {
+        var titles = $('right-guide').getElementsByTagName('li');
+        var divs = $('right-content').getElementsByClassName('mod');
+
+        for (var i = 0; i < titles.length; i++) {
+            titles[i].id = i;
+            titles[i].onclick = function () {
+                for (var j = 0; j < titles.length; j++) {
+                    titles[j].className = ' ';
+                    divs[j].style.display = 'none';
+                }
+                this.className = 'select';
+                divs[this.id].style.display = 'block';
+            }
+        }
+    }
+    router.get('/course_recommened',function (req,res) {
+        res.render('course_recommened',{})
+    })
+</script>

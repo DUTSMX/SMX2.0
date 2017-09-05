@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>尚名校</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/details.css">
+    <link rel="stylesheet" href="stylesheets/admin.css">
+    <link rel="stylesheet" href="stylesheets/teacher.css">
+</head>
+<body>
+<% include navigation.ejs %>
+
+<div class="head">
+    <div class="header">
+        <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
+        <div class="headpassage">
+            <p1>齐书强</p1>
+            <br>
+            <p2>18742585736</p2>
+        </div>
+        <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="content">
+        <div class="s-left">
+            <div class="guide"><a href="/education">课程管理</a></div>
+            <div class="guide"><a href="/education_teacher">教师管理</a></div>
+            <div class="guide"><a href="/education_detail">个人信息</a></div>
+        </div>
+
+        <div class="s-right">
+            <div class="right-guide" id="right-guide">
+                <ul>
+                    <li><a href="#">筛选老师</a></li>
+                </ul>
+            </div>
+            <div class="right-content" id="right-content" style="background:white;">
+                <div class="basic">
+                    <p>教师信息：</p>
+                    <form>
+                        <label>姓名:</label>
+                        <span>齐书强</span>
+                    </form>
+                    <form>
+                        <label>性别:</label>
+                        <span>男</span>
+                    </form>
+                    <form>
+                        <label>年龄:</label>
+                        <span>21岁</span>
+                    </form>
+                    <form>
+                        <label>学校:</label>
+                        <span>大连理工大学</span>
+                    </form>
+                    <form>
+                        <label>手机:</label>
+                        <span>18742585736</span>
+                    </form>
+                </div>
+
+                <div class="basic" style="height:auto; border-bottom:none;">
+                    <form>
+                        <label>等级:</label>
+                        <span>金牌讲师</span>
+                    </form>
+                    <form>
+                        <label>科目:</label>
+                        <span>数学</span>
+                    </form>
+                    <form>
+                        <label>状态:</label>
+                        <span>已派遣（台安店）</span>
+                    </form>
+                    <button class="sub">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
