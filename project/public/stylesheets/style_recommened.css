@@ -25,6 +25,6 @@
 .submit input{
     background:#8ABFDC; color:white; outline:none; border:1px solid transparent; border-radius:5px; height:50px; font-size:20px;
 }
-.submit input:hover{
-    cursor:pointer;
-0
+.submit input:hover {
+    cursor: pointer;
+}

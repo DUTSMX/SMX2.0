@@ -30,10 +30,10 @@
 
             <div class="right-guide" id="right-guide">
                 <ul>
-                    <li><a href="allCourse">全部</a></li>
-                    <li><a href="/finishCourse">已完成</a></li>
-                    <li><a href="/nowCourse">进行中</a></li>
-                    <li><a href="/notstartCourse">未开始</a></li>
+                    <li><a href="#">全部</a></li>
+                    <li><a href="#">已完成</a></li>
+                    <li><a href="#">进行中</a></li>
+                    <li><a href="#">未开始</a></li>
                 </ul>
             </div>
 
@@ -41,10 +41,11 @@
 
 
                 <div class="mod">
-                    <div>
-                        <%if(AllCourse.length == 0){%>
-                        <%}AllCourse.forEach(function (item) { %>
-                    </div>
+
+                        <%if(allCourse.length == 0){%>
+                    <h4 style="text-align: center;margin:10px">没有课程</h4>
+                        <%}allCourse.forEach(function (item) { %>
+
                     <div class="box">
                         <img src="img/picture.jpg"/>
 
@@ -60,10 +61,11 @@
 
 
                 <div class="mod" style="display:none">
-                    <div>
-                        <%if(FinishCourse.length == 0){%>
-                        <%}FinishCourse.forEach(function (item) { %>
-                    </div>
+
+                        <%if(finishCourse.length == 0){%>
+                    <h4 style="text-align: center;margin:10px">没有已完成的课程</h4>
+                        <%}finishCourse.forEach(function (item) { %>
+
                     <div class="box">
                         <img src="img/picture.jpg"/>
                         <div class="course-title"><a><%=item.courseSeriesName%></a></div>
@@ -77,10 +79,11 @@
                 </div>
 
                 <div class="mod" style="display:none">
-                    <div>
-                        <%if(NowCourse.length == 0){%>
-                        <%}NowCourse.forEach(function (item) { %>
-                    </div>
+
+                        <%if(nowCourse.length == 0){%>
+                    <h4 style="text-align: center;margin:10px">没有进行中的课程</h4>
+                        <%}nowCourse.forEach(function (item) { %>
+
                     <div class="box">
                         <img src="img/picture.jpg"/>
                         <div class="course-title"><a><%=item.courseSeriesName%></a></div>
@@ -95,14 +98,13 @@
 
 
                 <div class="mod" style="display:none">
-                    <div>
-                        <%if(NotCourse.length == 0){%>
-                        <%}NotCourse.forEach(function (item) { %>
-                    </div>
+                        <%if(postCourse.length == 0){%>
+                    <h4 style="text-align: center;margin:10px">没有申请中的课程</h4>
+                        <%}postCourse.forEach(function (item) { %>
                     <div class="box">
                         <img src="img/picture.jpg"/>
-                        <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
+                        <div class="course-title"><a><%=item.seriesName%></a></div>
+                        <div class="course-info"><a><%=item.hopeClassType%></a>    <a><%=item.hopeTime%></a>    <a><%=item.hopeTeacher + "老师"%></a>
                         </div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
@@ -126,7 +128,9 @@
 
         for (var i = 0; i < titles.length; i++) {
             titles[i].id = i;
+            console.log("id:"+titles[i].id)
             titles[i].onclick = function () {
+                console.log(this)
                 for (var j = 0; j < titles.length; j++) {
                     titles[j].className = ' ';
                     divs[j].style.display = 'none';
