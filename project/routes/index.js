@@ -25,11 +25,11 @@ router.get('/student_detail',function(req,res,next){
         res.render('student_detail',{data:ret[0][0]});
     })
 });
-<<<<<<< HEAD
+
 /**
  * 我的课程
  */
-=======
+
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
     var sql = "SELECT t.class, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -42,7 +42,7 @@ router.get('/teacher_detail',function(req,res,next){
         res.render('teacher_detail',{data:ret[0][0]});
     })
 });
->>>>>>> b50e709765735c7b011d16385a4e436629a95f92
+
 router.get('/student',function(req,res,next){
     var studentId = 34;
     student.findOne({'where':{studentId:34}}).then(function (student) {
@@ -167,10 +167,11 @@ router.get('/student_postCourse',function (req, res, next) {
     })
 })
 */
+/*
 router.get('/course_re',function(req,res,next){
     res.render('course_re');
 });
-
+*/
 
 
 
@@ -299,12 +300,11 @@ router.get('/teacher_postCourse',function (req, res, next) {
 router.get('/teacher_detail',function(req,res,next){
     res.render('teacher_detail')
 });
-<<<<<<< HEAD
+
 router.get('/teacher_re',function(req,res,next){
     res.render('teacher_re')
 });
-=======
->>>>>>> b50e709765735c7b011d16385a4e436629a95f92
+
 
 router.post("/editInfo",function (req,res) {
     console.log(JSON.stringify(req.body))
