@@ -8,7 +8,26 @@ var joinreceptionshop=require('../model/joinreceptionshop')
 var joinreceptionmanager=require('../model/joinreceptionmanager');
 var student = require("../model/student")
 var teacher = require("../model/teacher")
+var http=require("http")
 /* GET home page. */
+router.get('/appSign', function (req, res, next) {
+    var opt = {
+        method: "GET",
+        host: "www.shangmingxiao.com.cn",
+        port: 80,
+        path: "/appSign"
+    }
+    var req1 = http.request(opt, function (serverFeedback) {
+        serverFeedback.setEncoding("utf8");
+        serverFeedback.on('data', function (body) {
+            res.send(body)
+        })
+    })
+    req1.on('error', function (e) {
+        console.log("problem with request " + e.message);
+    })
+    req1.end();
+})
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -20,8 +39,8 @@ router.get('/student_detail',function(req,res,next){
         "JOIN account a ON a.userId = s.userId  " +
         "WHERE s.studentId = " + studentId;
     db.sequelize.query(sql).then(function (ret) {
-        console.log(JSON.stringify(ret));
-        console.log(JSON.stringify({data:ret[0][0]}));
+        //console.log(JSON.stringify(ret));
+        //console.log(JSON.stringify({data:ret[0][0]}));
         res.render('student_detail',{data:ret[0][0]});
     })
 });
@@ -296,7 +315,7 @@ router.get('/teacher_detail',function(req,res,next){
     res.render('teacher_detail')
 });
 router.post("/editInfo",function (req,res) {
-    console.log(JSON.stringify(req.body))
+    //console.log(JSON.stringify(req.body))
     user.update({
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
@@ -323,6 +342,17 @@ router.post("/changeInfo",function (req,res) {
         },{'where':{userId:87}}).then(
             res.send("123")
         )
+    })
+})
+router.post("/imgInfo",function (req,res) {
+    console.log("111");
+    //console.log(JSON.stringify(req.body))
+    user.update({
+        userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
+        userBackIdHeadUrl: req.body.userBackIdHeadUrl,
+    }, {'where': {userId: 87}}).then(function (data) {
+        res.send("修改成功")
+
     })
 })
 /*
