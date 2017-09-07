@@ -5,15 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css'>
     <link rel="stylesheet" href="stylesheets/details.css">
 </head>
-<body>
+<body onload="uploadImage()">
 <%include navigation.ejs%>
 <div class="head">
     <div class="header">
-        <div class="headphoto"><img src="img/headlogo.png" width="91px" height="88px"></div>
+        <div class="headphoto"><img src="<%=data.userHeadUrl%>" width="91px" height="88px"></div>
         <div class="headpassage">
 
-            <p1 ><%=data.userName%></p1><br>
-            <p2 >成绩：95</p2><br>
+            <p1 >姓名：<%=data.userName%></p1><br>
             <p2>住址：<%=data.userAddress%></p2>
         </div>
         <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
@@ -38,37 +37,34 @@
                     <li >住址：<%=data.userAddress%></li>
                 </ul>
             </div>
-        <form action="#" method="post">
             <div class="ziliao" id="reinfo" style="display: block">
-
                 <ul>
                     <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" /></li>
-                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-class" placeholder="<%=data.grade%>" /></li>
+                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="<%=data.grade%>" /></li>
                     <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.school%>" /></li>
                     <li>联系方式：<input placeholder="<%=data.phoneNumber%>" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
                     <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" /></li>
-
                 </ul>
-
             </div>
             <div class="photo">
-                <div class="img">
-                    <img src="img/touxiang.png" width="100px">
+                <div class="pbutton_1">
+                    <input type="file" class="button" id="head-img-input"/>
                 </div>
+                <img src="<%=data.userHeadUrl%>" id="head_img" height="100%" width="100%">
             </div>
 
             <div class="pbutton12" id="revise" >
                 <button class="button button2"  type="button" >修&nbsp改</button>
             </div>
             <div class="pbutton12" id="save" style="display: none">
-                <p class="button button2" onclick="editInfo()">保 存 </p>
+                <button class="button button2"  type="button" onclick="editInfo()">完&nbsp成</button>
             </div>
-        </form>
             <div class="line1">
                 <div class="line"></div>
             </div>
             <div class="pbutton21">
-                <a href="#"><button class="button button2" id="show" >申请修改</button></a>
+                <button class="button button2" id="apply" >申请修改</button>
+                <button class="button button2" id="apply_finish" onclick="stuimgInfo()">完成修改</button>
             </div>
             <div class="line2">
                 <div class="line"></div>
@@ -76,8 +72,20 @@
             <div class="idlogin">
 
                 <li>注册身份信息</li>
-                <div class="idphoto1"><img src="img/headlogo.png"></div>
-                <div class="idphoto2"><img src="img/headlogo.png"></div>
+                <div class="idphoto1">
+                    <div class="pbutton_re1">
+                        <input type="file" class="button" id="image-front-input"/>
+                    </div>
+                    <img src="<%=data.userFrontIdHeadUrl%>" id="image-front" height="100%" width="100%">
+                    <p>身份证正面</p>
+                </div>
+                <div class="idphoto2">
+                    <div class="pbutton_re2">
+                        <input type="file" class="button" id="image-back-input"/>
+                    </div>
+                    <img src="<%=data.userBackIdHeadUrl%>" id="image-back" height="100%" width="100%">
+                    <p>身份证背面</p>
+                </div>
             </div>
 
         </div>
@@ -86,26 +94,93 @@
     </div>
 </div>
 </body>
-<script src="javascripts/jquery.min.js">
-</script>
+<script src="javascripts/jquery.min.js"></script>
+<script src="javascripts/sdk/qcloud_sdk.js"></script>
 <script>
     $(document).ready(function(){
 
         $("#reinfo").hide();
+        $(".pbutton_re1").hide();
+        $(".pbutton_re2").hide();
+        $(".pbutton_1").hide();
+        $("#apply_finish").hide();
         $("#revise").click(function(){
-
+            $(".pbutton_1").fadeIn(1000);
             $("#info").fadeOut(1000);
             $("#reinfo").fadeIn(1000);
             $("#revise").fadeOut(1000);
             $("#save").fadeIn(1000);
         });
-    });
+        $("#apply").click(function(){
+            $(".pbutton_re1").fadeIn(1000);
+            $(".pbutton_re2").fadeIn(1000);
+            $("#apply").hide();
+            $("#apply_finish").fadeIn(1000);
+        });
+        $("#apply_finish").click(function(){
+            $(".pbutton_re1").hide();
+            $(".pbutton_re2").hide();
+            $("#apply").fadeIn(1000);
+            $("#apply_finish").hide();
+        });
 
-    router.get('/course_recommened',function (req,res) {
-        res.render('course_recommened',{})
-    })
+    });
 </script>
 <script type="text/javascript">
+    var frontUrl = "<%=data.userFrontIdHeadUrl%>";
+    var backUrl = "<%=data.userBackIdHeadUrl%>";
+    var headUrl = "<%=data.userHeadUrl%>";
+    function uploadImage(){
+        var userId = "<%=data.userId%>"
+        var cos = new CosCloud("10068625","/")
+        document.getElementById("image-front-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var name = fileList[0].name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                console.log("name:"+fileList[0].name)
+                console.log("postfix:"+postfix)
+                cos.uploadFile(function(result){
+                    frontUrl = JSON.parse(result).data.access_url;
+                    $("#image-front").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+JSON.stringify(err));
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("image-back-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var name = fileList[0].name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    backUrl = JSON.parse(result).data.access_url;
+                    $("#image-back").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("head-img-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var name = fileList[0].name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    headUrl = JSON.parse(result).data.access_url;
+                    $("#head_img").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+    }
     function showps(){
         if (this.forms.password.type="password") {
             document.getElementById("box").innerHTML="<input type=\"text\" name=\"password\" id=\"password\" size=\"80\" style='width:\"150\";' value="+this.forms.password.value+">";
@@ -146,7 +221,6 @@
         }
         else {
             alert("输入格式不对，请重新输入");
-
         }
     }
     function clearNoNum(obj){
@@ -173,20 +247,33 @@
         if(100<=parseFloat(obj.value))
             obj.value = "";
         if(parseFloat(obj.value)<0)
-            obj.value="";
+         obj.value="";
     }
     function editInfo(){
-
         var data = {
             userName:$("#person-name").val(),
             grade:$("#person-grade").val(),
             school:$("#person-school").val(),
             phoneNumber:$("#person-phoneNumber").val(),
-            address:$("#person-address").val()
+            address:$("#person-address").val(),
+            userHeadUrl:headUrl,
+            userId:"<%=data.userId%>"
+        }
+        jQuery.post("./editInfo",data,function (ret) {
+            console.log("success");
+            console.log("data1:"+JSON.stringify(data))
+            location.reload();
+        })
+    }
+    function stuimgInfo(){
+        var data = {
+            userFrontIdHeadUrl: frontUrl,
+            userBackIdHeadUrl: backUrl,
+            userId:"<%=data.userId%>"
         }
         console.log("data1:"+JSON.stringify(data))
-        jQuery.post("./editInfo",data,function (ret) {
-            console.log(JSON.stringify(ret));
+        jQuery.post("./stuimgInfo",data,function (ret) {
+            //console.log(JSON.stringify(ret));
             location.reload();
         })
     }
