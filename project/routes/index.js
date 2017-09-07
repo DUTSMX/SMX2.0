@@ -1,40 +1,40 @@
 var express = require('express');
 var router = express.Router();
-var db = require("../model/db")
+var db = require("../model/db");
 var course=require('../model/course');
 var user=require(('../model/user'));
-var series = require('../model/series')
-var joinreceptionshop=require('../model/joinreceptionshop')
+var series = require('../model/series');
+var joinreceptionshop=require('../model/joinreceptionshop');
 var joinreceptionmanager=require('../model/joinreceptionmanager');
-var student = require("../model/student")
-var teacher = require("../model/teacher")
-var http=require("http")
+var student = require("../model/student");
+var teacher = require("../model/teacher");
+var http=require("http");
 /* GET home page. */
 router.get('/appSign', function (req, res, next) {
     var opt = {
         method: "GET",
         host: "www.shangmingxiao.com.cn",
         port: 80,
-        path: "/appSign"
-    }
+        path: "/appSign?sign_type=appSign&expired="+req.query.expired+"&bucketName="+req.query.bucketName
+    };
     var req1 = http.request(opt, function (serverFeedback) {
         serverFeedback.setEncoding("utf8");
         serverFeedback.on('data', function (body) {
             res.send(body)
         })
-    })
+    });
     req1.on('error', function (e) {
         console.log("problem with request " + e.message);
-    })
+    });
     req1.end();
-})
+});
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
 router.get('/student_detail',function(req,res,next){
     var studentId = 16;
-    var sql = "SELECT a.userName ,a.userAge ,s.school ,s.grade ,s.personalSign ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
+    var sql = "SELECT a.userName ,a.userAge ,a.userId ,s.school ,s.grade ,s.personalSign ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
         "FROM  student s " +
         "JOIN account a ON a.userId = s.userId  " +
         "WHERE s.studentId = " + studentId;
@@ -91,10 +91,10 @@ router.get('/student',function(req,res,next){
                             "JOIN seriesTemplate s ON s.templateId = j.templateId " +
                             "WHERE process = 0 and j.studentId="+student.studentId;
                         db.sequelize.query(sql).then(function (postCourse) {
-                            console.log("allCourse:"+JSON.stringify(allCourse[0]))
-                            console.log("nowCourse:"+JSON.stringify(nowCourse[0]))
-                            console.log("finishCourse:"+JSON.stringify(finishCourse[0]))
-                            console.log("postCourse:"+JSON.stringify(postCourse[0]))
+                            console.log("allCourse:"+JSON.stringify(allCourse[0]));
+                            console.log("nowCourse:"+JSON.stringify(nowCourse[0]));
+                            console.log("finishCourse:"+JSON.stringify(finishCourse[0]));
+                            console.log("postCourse:"+JSON.stringify(postCourse[0]));
                             res.render('student_course',{allCourse:allCourse[0],nowCourse:nowCourse[0],finishCourse:finishCourse[0],postCourse:postCourse[0]});
                         })
                     })
@@ -203,10 +203,10 @@ router.get('/teacher_re',function (req,res,next) {
         "order by userName,time";
     console.log("sql" + sql);
     db.sequelize.query(sql).then(function (data) {
-        console.log("course:"+JSON.stringify(data[0]))
+        console.log("course:"+JSON.stringify(data[0]));
         res.render('teacher_re',{AllCourse:data[0]});
     })
-})
+});
 
 
 router.get('/course_re',function (req,res,next) {
@@ -216,10 +216,10 @@ router.get('/course_re',function (req,res,next) {
         "order by userName,time";
     console.log("sql" + sql);
     db.sequelize.query(sql).then(function (data) {
-        console.log("course:"+JSON.stringify(data[0]))
+        console.log("course:"+JSON.stringify(data[0]));
         res.render('course_re',{AllCourse:data[0]});
     })
-})
+});
 
 /**
  * 教师端
@@ -243,9 +243,9 @@ router.get('/teacher',function(req,res,next){
                         "JOIN seriesTemplate s ON s.templateId = j.templateId " +
                         "WHERE process = 0 and j.hopeTeacher='"+user.userName+"'";
                     db.sequelize.query(sql).then(function (postCourse) {
-                        console.log("finishCourse:"+JSON.stringify(finishCourse[0]))
-                        console.log("nowCourse:"+JSON.stringify(nowCourse[0]))
-                        console.log("postCourse:"+JSON.stringify(postCourse[0]))
+                        console.log("finishCourse:"+JSON.stringify(finishCourse[0]));
+                        console.log("nowCourse:"+JSON.stringify(nowCourse[0]));
+                        console.log("postCourse:"+JSON.stringify(postCourse[0]));
                         res.render('teacher_course',{finishCourse:finishCourse[0],nowCourse:nowCourse[0],postCourse:postCourse[0]});
                     })
                 })
@@ -323,22 +323,22 @@ router.get('/teacher_re',function(req,res,next){
 
 
 router.post("/editInfo",function (req,res) {
-    //console.log(JSON.stringify(req.body))
+    console.log("123"+JSON.stringify(req.body));
     user.update({
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
         userAddress:req.body.address,
-    },{'where':{userId:34}}).then(function (data) {
+    },{'where':{userId:req.body.userId}}).then(function (data) {
         student.update({
             grade:req.body.grade,
-            school:req.body.school
-        },{'where':{userId:34}}).then(
+            school:req.body.school,
+        },{'where':{userId:req.body.userId}}).then(
             res.send("123")
         )
     })
-})
+});
 router.post("/changeInfo",function (req,res) {
-    console.log(JSON.stringify(req.body))
+    console.log(JSON.stringify(req.body));
     user.update({
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
@@ -351,18 +351,18 @@ router.post("/changeInfo",function (req,res) {
             res.send("123")
         )
     })
-})
+});
 router.post("/imgInfo",function (req,res) {
     console.log("111");
     //console.log(JSON.stringify(req.body))
     user.update({
         userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
         userBackIdHeadUrl: req.body.userBackIdHeadUrl,
-    }, {'where': {userId: 87}}).then(function (data) {
+    }, {'where': {userId:34 }}).then(function (data) {
         res.send("修改成功")
 
     })
-})
+});
 /*
  *教务
  */
