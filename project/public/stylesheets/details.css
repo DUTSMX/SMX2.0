@@ -47,21 +47,18 @@
 }
 .back212
 {
-    width: 757px;
-    height: 569px;
+    margin-left:240px; width:auto;
+    height:569px;
     background-color: white;
-    position: absolute;
-    top: 20px;
-    left:243px;
 }
 .ziliao
 {
-    width:572px;
+    width: 100%;
     height: 220px;
-    background:none;
-    position: absolute;
-    top:51px;
-    left: 94px;
+    margin-left:291px;
+    top:10.52%;
+    left: 6.37%;
+    position:absolute;
 }
 
 .photo
@@ -71,7 +68,7 @@
     background:rgb(42,180,185);
     position: absolute;
     top:41px;
-    left: 565px;
+    left: 820px;
 }
 .pbutton11
 {
@@ -79,7 +76,7 @@
     height:40px;
     position: absolute;
     top:202px;
-    left: 532px;
+    left: 80%;
 }
 .pbutton12
 {
@@ -87,7 +84,7 @@
     height:40px;
     position: absolute;
     top:202px;
-    left: 637px;
+    left: 87%;
 }
 .pbutton21
 {
@@ -95,26 +92,26 @@
     height:40px;
     position: absolute;
     top:370px;
-    left: 637px;
+    left: 87%;
 }
 
 .line1
 {
-    width:719px;
+    width:70%;
     height:3px;
     background:none;
     position: absolute;
     top:239px;
-    left:19px;
+    left:259px;
 }
 .line2
 {
-    width:719px;
+    width:70%;
     height:3px;
     background:none;
     position: absolute;
     top:407px;
-    left:19px;
+    left:259px;
 }
 .idlogin
 {
@@ -123,7 +120,7 @@
     background:none;
     position: absolute;
     top:253px;
-    left: 51px;
+    left: 35.1%;
 }
 .headphoto
 {
@@ -161,6 +158,7 @@
     top:50px;
     left:19px;
 }
+
 .idphoto2
 {
     width:124px;
@@ -169,6 +167,25 @@
     position: absolute;
     top:50px;
     left:196px;
+}
+.pbutton_re1{
+    width: 105px;
+    height: 40px;
+    background:none;
+    position: absolute;
+    top:20px;
+    left:10px;
+
+}
+
+.pbutton_re2{
+    width: 105px;
+    height: 40px;
+    background:none;
+    position: absolute;
+    top:20px;
+    left:10px;
+
 }
 .button
 {
@@ -216,12 +233,15 @@
 }
 .line
 {
-    width:722px;
+    width:100%;
     height:3px;
     background:rgb(137,191,219);
     position: absolute;
     top:0px;
     left:0px;
+}
+.pbutton_re1{
+
 }
 .main li
 {
@@ -283,7 +303,8 @@ div.img
     color:#78AAA9;
 }
 .right-content{
-    width:100%; overflow-y:auto;
+    width:100%;
+    overflow-y:auto;
     margin-top:10px;
 }
 .box{

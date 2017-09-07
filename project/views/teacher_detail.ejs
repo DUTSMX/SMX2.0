@@ -187,5 +187,20 @@
             location.reload();
         })
     }
+    function imgInfo(){
+        var data = {
+            userName:$("#person-name").val(),
+            grade:$("#person-grade").val(),
+            school:$("#person-school").val(),
+            phoneNumber:$("#person-phoneNumber").val(),
+            address:$("#person-address").val(),
+        }
+        console.log("data:"+JSON.stringify(data))
+        jQuery.post("./imgInfo",data,function (ret) {
+            console.log(JSON.stringify(ret));
+            location.reload();
+        })
+    }
+
 
 </script>
