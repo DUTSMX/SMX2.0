@@ -275,9 +275,10 @@ CosCloud.prototype.uploadFile = function(success, error, bucketName, remotePath,
     console.log("remotePath:"+remotePath)
 	var that = this;
 	this.getAppSign(function(json){
-		// console.log("json:"+JSON.stringify(json));
-		json = JSON.stringify(json);
-		var jsonResult = $.parseJSON(json);
+		console.log("json:"+json);
+		//json = JSON.stringify(json);
+		var jsonResult = JSON.parse(json);
+        console.log(typeof jsonResult)
 		var sign = jsonResult.data.sign;
 		console.log("sign:"+sign)
 		var url = that.cosapi_cgi_url + that.appid + "/" + bucketName + encodeURI(remotePath) + "?sign=" + encodeURIComponent(sign);
