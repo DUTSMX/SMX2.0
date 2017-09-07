@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>尚名校</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/details.css">
+    <link rel="stylesheet" href="stylesheets/admin.css">
+    <link rel="stylesheet" href="stylesheets/teacher.css">
+</head>
+<body>
+<% include navigation.ejs %>
+
+<div class="head">
+    <div class="header">
+        <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
+        <div class="headpassage">
+            <p1>齐书强</p1>
+            <br>
+            <p2>18742585736</p2>
+        </div>
+        <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="content">
+        <div class="s-left">
+            <div class="guide"><a href="/education">课程管理</a></div>
+            <div class="guide"><a href="/education_teacher">教师管理</a></div>
+            <div class="guide"><a href="/education_detail">个人信息</a></div>
+        </div>
+
+        <div class="s-right">
+            <div class="right-guide" id="right-guide">
+                <ul>
+                    <li><a href="#">筛选老师</a></li>
+                </ul>
+            </div>
+            <div class="right-content" id="right-content" style="background:white; height:450px;">
+                <p>你将把老师派遣到：</p>
+                <form class="patching">
+                    <label>分店:</label>
+                    <select>
+                        <option>台安店</option>
+                    </select>
+                </form>
+                <form class="patching">
+                    <label>课程:</label>
+                    <select>
+                        <option>数学</option>
+                        <option>语文</option>
+                        <option>英语</option>
+                    </select>
+                </form>
+                <form class="patching">
+                    <label>时间:</label>
+                    <input type="text" placeholder="年/月/日">
+                </form>
+                <input type="submit" class="sub">
+            </div>
+        </div>
+    </div>
+</div>
+</body>

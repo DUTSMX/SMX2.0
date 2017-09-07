@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>尚名校</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/details.css">
+    <link rel="stylesheet" href="stylesheets/admin.css">
+    <link rel="stylesheet" href="stylesheets/teacher.css">
+</head>
+<body>
+<% include navigation.ejs %>
+
+<div class="head">
+    <div class="header">
+        <div class="headphoto"><img src="img/headphoto.png" width="91px" height="88px"></div>
+        <div class="headpassage">
+            <p1>齐书强</p1>
+            <br>
+            <p2>18742585736</p2>
+        </div>
+        <div class="headlogo"><img src="img/headlogo.png" width="119px" height="100px"></div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="content">
+        <div class="s-left">
+            <div class="guide"><a href="/education">课程管理</a></div>
+            <div class="guide"><a href="/education_teacher">教师管理</a></div>
+            <div class="guide"><a href="/education_detail">个人信息</a></div>
+        </div>
+
+        <div class="s-right">
+            <div class="right-guide" id="right-guide">
+                <ul>
+                    <li><a href="/education_teacherchoose">筛选</a></li>
+                </ul>
+            </div>
+
+            <div class="right-content" id="right-content">
+                <div class="mod">
+                    <div class="box" style="background:#CFE6E5;">
+                        <label>科目：</label>
+                        <select id = "subjectSelect">
+                            <option value="语文">语文</option>
+                            <option value="数学">数学</option>
+                            <option value="英语">英语</option>
+                            <option value="物理">物理</option>
+                        </select>
+                        <label>学校：</label>
+                        <select id = "schoolSelect">
+                            <option value="大连理工大学">大连理工大学</option>
+                            <option value="四川大学">四川大学</option>
+                            <option value="北京大学">北京大学</option>
+                        </select>
+                        <label>老师：</label>
+                        <select id = "nameSelect">
+                            <option value="齐书强">齐书强</option>
+                            <option value="李金泰">李金泰</option>
+                            <option value="赵宇航">赵宇航</option>
+                        </select>
+                        <button onclick="Sel()" style="font-size: 18px;color: white" class="patch">筛选</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <%teacher.forEach(function (item) {%>
+            <div class="mod">
+
+                <div class="box">
+                    <img src="img/picture.jpg"/>
+
+
+                    <div class="course-title  name"><a><%=item.userName%></a></div>
+                    <div class="subject"><a><%=item.teachClass%></a></div>
+
+                    <div class="course-info college"><a><%=item.college%></a></div>
+
+                    <div class="course-info" style="margin-top:100px;"><a>金牌讲师</a></div>
+
+                    <div class="details">
+                        <div class="patch"><a href="/education_allocate">派遣</a></div>
+
+                        <div class="patch"><a onclick="detail(<%=item.teacherId%>)">详情</a></div>
+                    </div>
+                    <div class="pro-bac"></div>
+                    <div class="pro-fro"></div>
+                </div>
+                <!--
+
+                <div class="box">
+                    <img src="img/picture.jpg"/>
+
+                    <div class="course-title"><a>李四</a></div>
+                    <div class="subject"><a>英语</a></div>
+                    <div class="course-info"><a>北京大学</a></div>
+                    <div class="course-info" style="margin-top:100px;"><a>银牌讲师</a></div>
+                    <div class="details">
+                        <div class="patch"><a href="/education_allocate">派遣</a></div>
+                        <div class="patch"><a href="/education_teacherdetail">详情</a></div>
+                    </div>
+                    <div class="pro-bac"></div>
+                    <div class="pro-fro"></div>
+                </div>
+
+                <div class="box">
+                    <img src="img/picture.jpg"/>
+
+                    <div class="course-title"><a>王五</a></div>
+                    <div class="subject"><a>物理</a></div>
+                    <div class="course-info"><a>四川大学</a></div>
+                    <div class="course-info" style="margin-top:100px;"><a>铜牌讲师</a></div>
+                    <div class="details">
+                        <div class="patch"><a href="/education_allocate">派遣</a></div>
+                        <div class="patch"><a href="/education_teacherdetail">详情</a></div>
+                    </div>
+                    <div class="pro-bac"></div>
+                    <div class="pro-fro"></div>
+                </div>
+                -->
+
+            </div>
+            <%})%>
+
+
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="javascripts/jquery.min.js">
+</script>
+<script>
+    function detail(id){
+        location.href = "education_teacherdetail?teacherId="+id;
+    }
+
+    var boxList = document.getElementsByClassName("box")
+    var subjectList = document.getElementsByClassName("subject")
+    var schoolList = document.getElementsByClassName("college")
+    var nameList = document.getElementsByClassName("name")
+
+    console.log("boxList:"+boxList.length+" subjectList:"+subjectList.length)
+    function Sel() {
+        var subject = $("#subjectSelect").val()
+        var college = $("#schoolSelect").val()
+        var name = $("#nameSelect").val()
+
+        for(var i=0;i<subjectList.length;i++){
+            itemsub = subjectList[i];
+            itemsch = schoolList[i];
+            itemnam = nameList[i];
+            console.log($(itemsub).text()+" subject:"+subject)
+            console.log($(itemsch).text()+" college:"+college)
+            console.log($(itemnam).text()+" name:"+name)
+            if(($(itemsub).text() == subject)&&($(itemsch).text() == college)&&($(itemnam).text() == name)){
+                $(boxList[i+1]).show()
+                console.log("show")
+            }else{
+                $(boxList[i+1]).hide()
+                console.log("hide")
+            }
+            console.log()
+        }
+
+    }
+
+
+
+
+
+
+</script>
+

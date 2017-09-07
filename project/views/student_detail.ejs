@@ -42,11 +42,11 @@
             <div class="ziliao" id="reinfo" style="display: block">
 
                 <ul>
-                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="请输入姓名" /></li>
-                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-class" placeholder="请输年级" /></li>
-                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="请输入学校" /></li>
-                    <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="请输入住址" /></li>
+                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" /></li>
+                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-class" placeholder="<%=data.grade%>" /></li>
+                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.school%>" /></li>
+                    <li>联系方式：<input placeholder="<%=data.phoneNumber%>" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" /></li>
 
                 </ul>
 
