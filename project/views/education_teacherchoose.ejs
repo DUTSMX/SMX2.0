@@ -33,68 +33,142 @@
         <div class="s-right">
             <div class="right-guide" id="right-guide">
                 <ul>
-                    <li><a href="/choose">筛选老师</a></li>
+                    <li><a href="/education_teacherchoose">筛选</a></li>
                 </ul>
             </div>
+
             <div class="right-content" id="right-content">
                 <div class="mod">
                     <div class="box" style="background:#CFE6E5;">
                         <label>科目：</label>
-                        <select>
-                            <option>语文</option>
-                            <option>数学</option>
-                            <option>英语</option>
-                            <option>物理</option>
+                        <select id = "subjectSelect" onchange="Sel()">
+                            <option value="语文">语文</option>
+                            <option value="数学">数学</option>
+                            <option value="英语">英语</option>
+                            <option value="物理">物理</option>
                         </select>
                         <label>学校：</label>
-                        <select style="width:150px;">
-                            <option>大连理工大学</option>
-                            <option>四川大学</option>
-                            <option>北京大学</option>
+                        <select id = "schoolSelect" onchange="Sel()">
+                            <option value="大连理工大学">大连理工大学</option>
+                            <option value="四川大学">四川大学</option>
+                            <option value="北京大学">北京大学</option>
                         </select>
                         <label>老师：</label>
-                        <select>
-                            <option>齐书强</option>
-                            <option>张三</option>
-                            <option>李四</option>
+                        <select id = "nameSelect" onchange="Sel()">
+                            <option value="齐书强">齐书强</option>
+                            <option value="李金泰">李金泰</option>
+                            <option value="赵宇航">赵宇航</option>
                         </select>
                     </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>张三</a></div>
-                        <div class="subject"><a>数学</a></div>
-                        <div class="course-info"><a>大连理工大学</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>金牌讲师</a></div>
-                        <div class="details">
-                            <div class="patch"><a href="/education_allocate">派遣</a></div>
-                            <div class="patch"><a href="/education_teacherdetail">详情</a></div>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                    </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>李四</a></div>
-                        <div class="subject"><a>英语</a></div>
-                        <div class="course-info"><a>北京大学</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>银牌讲师</a></div>
-                        <div class="details">
-                            <div class="patch"><a href="/education_allocate">派遣</a></div>
-                            <div class="patch"><a href="/education_teacherdetail">详情</a></div>
-                        </div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                    </div>
-
 
                 </div>
             </div>
+
+            <%teacher.forEach(function (item) {%>
+            <div class="mod">
+
+                <div class="box">
+                    <img src="img/picture.jpg"/>
+
+
+                    <div class="course-title  name"><a><%=item.userName%></a></div>
+                    <div class="subject"><a><%=item.teachClass%></a></div>
+
+                    <div class="course-info college"><a><%=item.college%></a></div>
+
+                    <div class="course-info" style="margin-top:100px;"><a>金牌讲师</a></div>
+
+                    <div class="details">
+                        <div class="patch"><a href="/education_allocate">派遣</a></div>
+
+                        <div class="patch"><a onclick="detail(<%=item.teacherId%>)">详情</a></div>
+                    </div>
+                    <div class="pro-bac"></div>
+                    <div class="pro-fro"></div>
+                </div>
+                <!--
+
+                <div class="box">
+                    <img src="img/picture.jpg"/>
+
+                    <div class="course-title"><a>李四</a></div>
+                    <div class="subject"><a>英语</a></div>
+                    <div class="course-info"><a>北京大学</a></div>
+                    <div class="course-info" style="margin-top:100px;"><a>银牌讲师</a></div>
+                    <div class="details">
+                        <div class="patch"><a href="/education_allocate">派遣</a></div>
+                        <div class="patch"><a href="/education_teacherdetail">详情</a></div>
+                    </div>
+                    <div class="pro-bac"></div>
+                    <div class="pro-fro"></div>
+                </div>
+
+                <div class="box">
+                    <img src="img/picture.jpg"/>
+
+                    <div class="course-title"><a>王五</a></div>
+                    <div class="subject"><a>物理</a></div>
+                    <div class="course-info"><a>四川大学</a></div>
+                    <div class="course-info" style="margin-top:100px;"><a>铜牌讲师</a></div>
+                    <div class="details">
+                        <div class="patch"><a href="/education_allocate">派遣</a></div>
+                        <div class="patch"><a href="/education_teacherdetail">详情</a></div>
+                    </div>
+                    <div class="pro-bac"></div>
+                    <div class="pro-fro"></div>
+                </div>
+                -->
+
+            </div>
+            <%})%>
+
+
         </div>
     </div>
 </div>
 </body>
+
+<script src="javascripts/jquery.min.js">
+</script>
+<script>
+    function detail(id){
+        location.href = "education_teacherdetail?teacherId="+id;
+    }
+
+    var boxList = document.getElementsByClassName("box")
+    var subjectList = document.getElementsByClassName("subject")
+    var schoolList = document.getElementsByClassName("college")
+    var nameList = document.getElementsByClassName("name")
+
+    console.log("boxList:"+boxList.length+" subjectList:"+subjectList.length)
+    function Sel() {
+        var subject = $("#subjectSelect").val()
+        var college = $("#schoolSelect").val()
+        var name = $("#nameSelect").val()
+
+        for(var i=0;i<subjectList.length;i++){
+            itemsub = subjectList[i];
+            itemsch = schoolList[i];
+            itemnam = nameList[i];
+            console.log($(itemsub).text()+" subject:"+subject)
+            console.log($(itemsch).text()+" college:"+college)
+            console.log($(itemnam).text()+" name:"+name)
+            if(($(itemsub).text() == subject)&&($(itemsch).text() == college)&&($(itemnam).text() == name)){
+                $(boxList[i+1]).show()
+                console.log("show")
+            }else{
+                $(boxList[i+1]).hide()
+                console.log("hide")
+            }
+            console.log()
+        }
+
+    }
+
+
+
+
+
+
+</script>
 

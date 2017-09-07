@@ -40,23 +40,28 @@
                     <p>教师信息：</p>
                     <form>
                         <label>姓名:</label>
-                        <span>齐书强</span>
+                        <span><%=teacher.userName%></span>
                     </form>
                     <form>
                         <label>性别:</label>
+                        <%if(teacher.gender == 0){%>
                         <span>男</span>
+                        <%}%>
+                        <%if(teacher.gender != 0){%>
+                        <span>女</span>
+                        <%}%>
                     </form>
                     <form>
                         <label>年龄:</label>
-                        <span>21岁</span>
+                        <span><%=teacher.userAge%></span>
                     </form>
                     <form>
                         <label>学校:</label>
-                        <span>大连理工大学</span>
+                        <span><%=teacher.college%></span>
                     </form>
                     <form>
                         <label>手机:</label>
-                        <span>18742585736</span>
+                        <span><%=teacher.phoneNumber%></span>
                     </form>
                 </div>
 
@@ -67,17 +72,23 @@
                     </form>
                     <form>
                         <label>科目:</label>
-                        <span>数学</span>
+                        <span><%=teacher.teachClass%></span>
                     </form>
                     <form>
                         <label>状态:</label>
                         <span>已派遣（台安店）</span>
                     </form>
-                    <button class="sub">返回</button>
+                    <button class="sub" onclick="back()">返回</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
+
+<script>
+    function back() {
+        location.href = "education_teacher";
+    }
+</script>
 

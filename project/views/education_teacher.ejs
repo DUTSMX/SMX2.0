@@ -33,26 +33,32 @@
         <div class="s-right">
             <div class="right-guide" id="right-guide">
                 <ul>
-                    <li><a href="/choose">筛选老师</a></li>
+                    <li><a href="/education_teacherchoose">筛选</a></li>
                 </ul>
             </div>
             <div class="right-content" id="right-content">
+                <%teacher.forEach(function (item) {%>
                 <div class="mod">
 
                     <div class="box">
                         <img src="img/picture.jpg"/>
 
-                        <div class="course-title"><a>张三</a></div>
-                        <div class="subject"><a>数学</a></div>
-                        <div class="course-info"><a>大连理工大学</a></div>
+
+                        <div class="course-title"><a><%=item.userName%></a></div>
+                        <div class="subject"><a><%=item.teachClass%></a></div>
+
+                        <!--<div class="course-info"><a>大连理工大学</a></div>
                         <div class="course-info" style="margin-top:100px;"><a>金牌讲师</a></div>
+                        -->
                         <div class="details">
                             <div class="patch"><a href="/education_allocate">派遣</a></div>
-                            <div class="patch"><a href="/education_teacherdetail">详情</a></div>
+                            
+                            <div class="patch"><a onclick="detail(<%=item.teacherId%>)">详情</a></div>
                         </div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                     </div>
+                    <!--
 
                     <div class="box">
                         <img src="img/picture.jpg"/>
@@ -83,8 +89,10 @@
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                     </div>
+                    -->
 
                 </div>
+                <%})%>
 
 
 
@@ -94,3 +102,11 @@
 </div>
 </body>
 
+<script>
+    
+
+    function detail(id){
+        console.log("sadfasdfasdf")
+        location.href = "education_teacherdetail?teacherId="+id;
+    }
+</script>

@@ -44,9 +44,8 @@ router.get('/student_detail',function(req,res,next){
         res.render('student_detail',{data:ret[0][0]});
     })
 });
-/**
- * 我的课程
- */
+
+
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
     var sql = "SELECT t.class, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -59,6 +58,7 @@ router.get('/teacher_detail',function(req,res,next){
         res.render('teacher_detail',{data:ret[0][0]});
     })
 });
+
 router.get('/student',function(req,res,next){
     var studentId = 34;
     student.findOne({'where':{studentId:34}}).then(function (student) {
@@ -183,10 +183,11 @@ router.get('/student_postCourse',function (req, res, next) {
     })
 })
 */
+/*
 router.get('/course_re',function(req,res,next){
     res.render('course_re');
 });
-
+*/
 
 
 
@@ -314,6 +315,13 @@ router.get('/teacher_postCourse',function (req, res, next) {
 router.get('/teacher_detail',function(req,res,next){
     res.render('teacher_detail')
 });
+
+
+router.get('/teacher_re',function(req,res,next){
+    res.render('teacher_re')
+});
+
+
 router.post("/editInfo",function (req,res) {
     console.log("123"+JSON.stringify(req.body));
     user.update({
@@ -365,17 +373,75 @@ router.get('/education_detail',function(req,res,next){
     res.render('education_detail')
 });
 router.get('/education_teacher',function(req,res,next){
-    res.render('education_teacher')
+
+    var sql = "SELECT t.teacherId as teacherId, t.college, a.userName, t.teachClass, count(c.courseSeriesTeacher) as teacherCount "+
+        "FROM account a JOIN teacher t ON a.userId = t.userId LEFT JOIN courseSeries c ON a.userId = c.courseSeriesTeacher "+
+        "WHERE role = 2 GROUP BY a.userId ORDER BY userName DESC, teacherCount "
+    db.sequelize.query(sql).then(function(teacherList){
+        console.log("teacherList:"+JSON.stringify(teacherList[0]));
+        res.render('education_teacher',{teacher:teacherList[0]});
+    })
+
 });
 router.get('/education_allocate',function(req,res,next){
     res.render('education_allocate')
 });
+/*
 router.get('/education_teacherdetail',function(req,res,next){
     res.render('education_teacherdetail')
 });
+*/
+router.get('/education_teacherdetail',function (req,res,next) {
+    teacher.findOne({'where':{teacherId:req.query.teacherId}}).then(function (teacher) {
+        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
+            user.teacherId =req.query.teacherId;
+
+                var sql = "SELECT t.teachClass, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.gender  " +
+                    "FROM  teacher t " +
+                    "JOIN account a ON a.userId = t.userId  " +
+                    "WHERE t.teacherId = " + user.teacherId;
+                db.sequelize.query(sql).then(function (ret) {
+                    console.log(JSON.stringify(ret));
+                    console.log(JSON.stringify({teacher:ret[0][0]}));
+                    res.render('education_teacherdetail',{teacher:ret[0][0]});
+
+            })
+        })
+    })
+})
+
 router.get('/education_teacherchoose',function(req,res,next){
-    res.render('education_teacherchoose')
+
+
+
+
+    var sql = "SELECT t.teacherId as teacherId,t.college, a.userName, t.teachClass, count(c.courseSeriesTeacher) as teacherCount "+
+        "FROM account a JOIN teacher t ON a.userId = t.userId LEFT JOIN courseSeries c ON a.userId = c.courseSeriesTeacher "+
+        "WHERE role = 2 GROUP BY a.userId ORDER BY userName DESC, teacherCount "
+    db.sequelize.query(sql).then(function(teacherList){
+        console.log("teacherList:"+JSON.stringify(teacherList[0]));
+        res.render('education_teacherchoose',{teacher:teacherList[0]});
+    })
 });
+
+router.post("/education_teacherchoose",function (req,res) {
+    console.log(JSON.stringify(req.body));
+    /*
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+        userAddress:req.body.address,
+    },{'where':{userId:34}}).then(function (data) {
+        student.update({
+            grade:req.body.grade,
+            school:req.body.school
+        },{'where':{userId:34}}).then(
+            res.send("123")
+            res.render('education_teacherchoose',{teacher:teacherList[0]})
+        )
+    })*/
+    res.res("1243");
+})
 
 
 
