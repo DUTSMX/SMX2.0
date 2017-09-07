@@ -48,13 +48,13 @@ router.get('/student_detail',function(req,res,next){
 
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
-    var sql = "SELECT t.class, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
+    var sql = "SELECT t.class, a.userName ,a.userId ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
         "FROM  teacher t " +
         "JOIN account a ON a.userId = t.userId  " +
         "WHERE t.teacherId = " + teacherId;
     db.sequelize.query(sql).then(function (ret) {
-        console.log(JSON.stringify(ret));
-        console.log(JSON.stringify({data:ret[0][0]}));
+        //console.log(JSON.stringify(ret));
+        //console.log(JSON.stringify({data:ret[0][0]}));
         res.render('teacher_detail',{data:ret[0][0]});
     })
 });
@@ -328,6 +328,7 @@ router.post("/editInfo",function (req,res) {
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
         userAddress:req.body.address,
+        userHeadUrl:req.body.userHeadUrl,
     },{'where':{userId:req.body.userId}}).then(function (data) {
         student.update({
             grade:req.body.grade,
@@ -342,23 +343,35 @@ router.post("/changeInfo",function (req,res) {
     user.update({
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
-        userAddress:req.body.address,
-    },{'where':{userId:87}}).then(function (data) {
+        userAddress:req.body.userAddress,
+        userHeadUrl:req.body.userHeadUrl,
+    },{'where':{userId:req.body.userId}}).then(function (data) {
         teacher.update({
-            class:req.body.grade,
-            college:req.body.school,
-        },{'where':{userId:87}}).then(
+            class:req.body.class,
+            college:req.body.college,
+        },{'where':{userId:req.body.userId}}).then(
             res.send("123")
         )
     })
 });
-router.post("/imgInfo",function (req,res) {
+router.post("/stuimgInfo",function (req,res) {
     console.log("111");
     //console.log(JSON.stringify(req.body))
     user.update({
         userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
         userBackIdHeadUrl: req.body.userBackIdHeadUrl,
-    }, {'where': {userId:34 }}).then(function (data) {
+    }, {'where': {userId:req.body.userId }}).then(function (data) {
+        res.send("修改成功")
+
+    })
+});
+router.post("/teachimgInfo",function (req,res) {
+    console.log("111");
+    //console.log(JSON.stringify(req.body))
+    user.update({
+        userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
+        userBackIdHeadUrl: req.body.userBackIdHeadUrl,
+    }, {'where': {userId:req.body.userId }}).then(function (data) {
         res.send("修改成功")
 
     })

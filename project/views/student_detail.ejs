@@ -9,7 +9,7 @@
 <%include navigation.ejs%>
 <div class="head">
     <div class="header">
-        <div class="headphoto"><img src="img/headlogo.png" width="91px" height="88px"></div>
+        <div class="headphoto"><img src="<%=data.userHeadUrl%>" width="91px" height="88px"></div>
         <div class="headpassage">
 
             <p1 >姓名：<%=data.userName%></p1><br>
@@ -37,38 +37,34 @@
                     <li >住址：<%=data.userAddress%></li>
                 </ul>
             </div>
-            <form action="#" method="post">
-                <div class="ziliao" id="reinfo" style="display: block">
-
-                    <ul>
-                        <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" /></li>
-                        <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="<%=data.grade%>" /></li>
-                        <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.school%>" /></li>
-                        <li>联系方式：<input placeholder="<%=data.phoneNumber%>" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                        <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" /></li>
-
-                    </ul>
-
+            <div class="ziliao" id="reinfo" style="display: block">
+                <ul>
+                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" /></li>
+                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="<%=data.grade%>" /></li>
+                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.school%>" /></li>
+                    <li>联系方式：<input placeholder="<%=data.phoneNumber%>" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" /></li>
+                </ul>
+            </div>
+            <div class="photo">
+                <div class="pbutton_1">
+                    <input type="file" class="button" id="head-img-input"/>
                 </div>
-                <div class="photo">
-                    <div class="img">
-                        <img src="img/touxiang.png" width="100px">
-                    </div>
-                </div>
+                <img src="<%=data.userHeadUrl%>" id="head_img" height="100%" width="100%">
+            </div>
 
-                <div class="pbutton12" id="revise" >
-                    <button class="button button2"  type="button" >修&nbsp改</button>
-                </div>
-                <div class="pbutton12" id="save" style="display: none">
-                    <button class="button button2"  type="button" onclick="editInfo()">完&nbsp成</button>
-                </div>
-            </form>
+            <div class="pbutton12" id="revise" >
+                <button class="button button2"  type="button" >修&nbsp改</button>
+            </div>
+            <div class="pbutton12" id="save" style="display: none">
+                <button class="button button2"  type="button" onclick="editInfo()">完&nbsp成</button>
+            </div>
             <div class="line1">
                 <div class="line"></div>
             </div>
             <div class="pbutton21">
                 <button class="button button2" id="apply" >申请修改</button>
-                <button class="button button2" id="apply_finish" onclick="imgInfo()">完成修改</button>
+                <button class="button button2" id="apply_finish" onclick="stuimgInfo()">完成修改</button>
             </div>
             <div class="line2">
                 <div class="line"></div>
@@ -106,9 +102,10 @@
         $("#reinfo").hide();
         $(".pbutton_re1").hide();
         $(".pbutton_re2").hide();
+        $(".pbutton_1").hide();
         $("#apply_finish").hide();
         $("#revise").click(function(){
-
+            $(".pbutton_1").fadeIn(1000);
             $("#info").fadeOut(1000);
             $("#reinfo").fadeIn(1000);
             $("#revise").fadeOut(1000);
@@ -132,6 +129,7 @@
 <script type="text/javascript">
     var frontUrl = "<%=data.userFrontIdHeadUrl%>";
     var backUrl = "<%=data.userBackIdHeadUrl%>";
+    var headUrl = "<%=data.userHeadUrl%>";
     function uploadImage(){
         var userId = "<%=data.userId%>"
         var cos = new CosCloud("10068625","/")
@@ -156,10 +154,26 @@
             var fileList = this.files;
             console.log("file:"+JSON.stringify(fileList))
             if(fileList.length>0){
-                var postfix = fileList[0].name.substr(name.lastIndexOf("."))
+                var name = fileList[0].name;
+                var postfix = name.substr(name.lastIndexOf("."))
                 cos.uploadFile(function(result){
                     backUrl = JSON.parse(result).data.access_url;
                     $("#image-back").attr('src',JSON.parse(result).data.access_url)
+                },function(err){
+                    console.log("error")
+                    console.log("err:"+err);
+                },"smxbucket","/idcard/"+userId+"card"+Math.floor((Math.random()*9000+1000))+postfix,fileList[0],0)
+            }
+        })
+        document.getElementById("head-img-input").addEventListener("change",function(){
+            var fileList = this.files;
+            console.log("file:"+JSON.stringify(fileList))
+            if(fileList.length>0){
+                var name = fileList[0].name;
+                var postfix = name.substr(name.lastIndexOf("."))
+                cos.uploadFile(function(result){
+                    headUrl = JSON.parse(result).data.access_url;
+                    $("#head_img").attr('src',JSON.parse(result).data.access_url)
                 },function(err){
                     console.log("error")
                     console.log("err:"+err);
@@ -242,6 +256,7 @@
             school:$("#person-school").val(),
             phoneNumber:$("#person-phoneNumber").val(),
             address:$("#person-address").val(),
+            userHeadUrl:headUrl,
             userId:"<%=data.userId%>"
         }
         jQuery.post("./editInfo",data,function (ret) {
@@ -250,13 +265,14 @@
             location.reload();
         })
     }
-    function imgInfo(){
+    function stuimgInfo(){
         var data = {
             userFrontIdHeadUrl: frontUrl,
             userBackIdHeadUrl: backUrl,
+            userId:"<%=data.userId%>"
         }
         console.log("data1:"+JSON.stringify(data))
-        jQuery.post("./imgInfo",data,function (ret) {
+        jQuery.post("./stuimgInfo",data,function (ret) {
             //console.log(JSON.stringify(ret));
             location.reload();
         })
