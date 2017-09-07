@@ -42,18 +42,18 @@
                 <div class="ziliao" id="reinfo" style="display: block">
 
                     <ul>
-                        <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="请输入姓名" /></li>
-                        <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="请输年级" /></li>
-                        <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="请输入学校" /></li>
-                        <li>联系方式：<input placeholder="请输入联系方式" name="shoujihao" id="person-phoneNumber"  maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                        <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="请输入住址" /></li>
+                        <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" /></li>
+                        <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="<%=data.class%>" /></li>
+                        <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.college%>" /></li>
+                        <li>联系方式：<input placeholder="<%=data.phoneNumber%>" name="shoujihao" id="person-phoneNumber"  maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                        <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" /></li>
 
                     </ul>
 
                 </div>
                 <div class="photo">
                     <div class="img">
-                        <img src="img/touxiang.png" width="100px">
+                        <img src="<%=data.userHeadUrl%>" width="100px">
                     </div>
                 </div>
 
@@ -61,14 +61,14 @@
                     <button class="button button2"  type="button" >修&nbsp改</button>
                 </div>
                 <div class="pbutton12" id="save" style="display: none">
-                    <p class="button button2" onclick="changeInfo()">保 存</p>
+                    <button class="button button2"  onclick="changeInfo()" type="button" >保 存</button>
                 </div>
             </form>
             <div class="line1">
                 <div class="line"></div>
             </div>
             <div class="pbutton21">
-                <a href="#"><button class="button button2" id="show" >申请修改</button></a>
+                <button class="button button2" id="show" >申请修改</button>
             </div>
             <div class="line2">
                 <div class="line"></div>
@@ -76,8 +76,8 @@
             <div class="idlogin">
 
                 <li>注册身份信息</li>
-                <div class="idphoto1"><img src="img/bridge.png"></div>
-                <div class="idphoto2"><img src="img/bridge.png"></div>
+                <div class="idphoto1"><img src="<%=data.userFrontIdHeadUrl%>"></div>
+                <div class="idphoto2"><img src="<%=data.userBackIdHeadUrl%>"></div>
             </div>
 
         </div>
