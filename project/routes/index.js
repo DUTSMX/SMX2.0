@@ -197,7 +197,7 @@ router.get('/course_re',function(req,res,next){
 * res:{allCourse:[]}
 * */
 router.get('/teacher_re',function (req,res,next) {
-    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.courseSeriesSubject, c.courseSeriesGrade,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
         "FROM courseSeries c " +
         "JOIN account a ON c.courseSeriesTeacher = a.userId "+
         "order by userName,time";
@@ -210,7 +210,7 @@ router.get('/teacher_re',function (req,res,next) {
 
 
 router.get('/course_re',function (req,res,next) {
-    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.courseSeriesSubject, c.courseSeriesGrade, c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
         "FROM courseSeries c " +
         "JOIN account a ON c.courseSeriesTeacher = a.userId "+
         "order by userName,time";

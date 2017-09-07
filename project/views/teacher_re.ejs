@@ -32,7 +32,9 @@
             <div class="right-guide" id="right-guide">
                 <ul>
                     <li><a href="#"></a></li>
-                    <li style="float: right"><a href="#">筛选课程</a></li>
+                    <li style="float: right">
+                        <a href="#">筛选课程</a>
+                    </li>
                 </ul>
             </div>
 
@@ -45,13 +47,64 @@
 
                     <div class="box">
                         <img src="img/picture.jpg"/>
-
                         <div class="course-title"><a><%=item.courseSeriesName%></a></div>
-                        <div class="course-info"><a><%=item.room%></a>&nbsp;&nbsp;&nbsp;<a><%=item.time%></a>&nbsp;&nbsp;&nbsp;<a><%=item.teacher + "老师"%></a>
+                        <div class="course-info">
+                            <a><%=item.room%></a>
+                            <a><%=item.time%></a>
+                            <a class="name"><%=item.teacher%></a>
+                            <a class="subject" style="display: none"><%=item.courseSeriesSubject%></a>
+                            <a class="grade" style="display: none"><%=item.courseSeriesGrade%></a>
                         </div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
+                        <div class="course-time"><a>截止时间：2017-7-14</a>
+                            <a>22:00</a></div>
+                    </div>
+                    <%})%>
+                </div>
+
+                <div class="mod" style="display:none;">
+                    <div class="box" style="background:#CFE6E5;">
+                        <label>科目：</label>
+                        <select onchange="Sel()" id="subjectSelect">
+                            <option value="不限">不限</option>
+                            <option value="语文">语文</option>
+                            <option value="数学">数学</option>
+                            <option value="英语">英语</option>
+                            <option value="物理">物理</option>
+                        </select>
+                        <label>年级：</label>
+                        <select onchange="Sel()" id="classSelect">
+                            <option value="不限">不限</option>
+                            <option value="高一">高一</option>
+                            <option value="高二">高二</option>
+                            <option value="高三">高三</option>
+                        </select>
+                        <label>老师：</label>
+                        <select onchange="Sel()" id="nameSelect">
+                            <option value="不限">不限</option>
+                            <option value="齐书强">齐书强</option>
+                            <option value="李金泰">李金泰</option>
+                            <option value="赵宇航">赵宇航</option>
+                        </select>
+                    </div>
+
+                    <%if(AllCourse.length == 0){%>
+                    <%}AllCourse.forEach(function (item) { %>
+                    <div class="box boxSel">
+                        <img src="img/picture.jpg"/>
+                        <div class="course-title classAndSubject"><a><%=item.courseSeriesName%></a></div>
+                        <div class="course-info">
+                            <a><%=item.room%></a>
+                            <a><%=item.time%></a>
+                            <a class="name"><%=item.teacher%></a>
+                            <a class="subject" style="display: none"><%=item.courseSeriesSubject%></a>
+                            <a class="grade" style="display: none"><%=item.courseSeriesGrade%></a>
+                        </div>
+                        <div class="pro-bac"></div>
+                        <div class="pro-fro"></div>
+                        <div class="course-time"><a>截止时间：2017-7-14</a>
+                            <a>22:00</a></div>
                     </div>
                     <%})%>
                 </div>
@@ -61,13 +114,46 @@
     </div>
 </div>
 </body>
+
+<script src = "javascripts/jquery.min.js">
+</script>
 <script>
-    function $(id) {
-        return typeof id === 'string' ? document.getElementById(id) : id;
+
+    var boxList = document.getElementsByClassName("boxSel")
+
+    function Sel() {
+
+        var nameSelect = document.getElementById("nameSelect").value;
+        var classSelect = document.getElementById("classSelect").value;
+        var subjectSelect = document.getElementById("subjectSelect").value;
+
+        console.log("select name:"+nameSelect+" subject:"+classSelect+" grade:"+subjectSelect)
+        for(var i=0;i<boxList.length;i++)
+        {
+            console.log(boxList[i])
+            var name = boxList[i].getElementsByClassName("name")[0].text;
+            var subject = boxList[i].getElementsByClassName("subject")[0].text;
+            var grade = boxList[i].getElementsByClassName("grade")[0].text;
+            console.log("name:"+name+" subject:"+subject+" grade:"+grade)
+            if((nameSelect == "不限" || nameSelect == name) &&
+                (classSelect == "不限" || classSelect == grade) &&
+                (subjectSelect == "不限" || subjectSelect == subject)){
+                $(boxList[i]).show()
+                console.log("show")
+            }
+            else
+            {
+                $(boxList[i]).hide()
+                console.log("hide")
+            }
+        }
+
     }
+
+
     window.onload = function () {
-        var titles = $('right-guide').getElementsByTagName('li');
-        var divs = $('right-content').getElementsByClassName('mod');
+        var titles = document.getElementById('right-guide').getElementsByTagName('li');
+        var divs = document.getElementById('right-content').getElementsByClassName('mod');
 
         for (var i = 0; i < titles.length; i++) {
             titles[i].id = i;
@@ -81,7 +167,4 @@
             }
         }
     }
-    router.get('/course_recommened',function (req,res) {
-        res.render('course_recommened',{})
-    })
 </script>
