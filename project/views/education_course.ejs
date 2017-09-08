@@ -51,6 +51,7 @@
                         <div class="course-title"><a><%=item.seriesName%></a></div>
                         <div class="course-info"><a><%=item.number%></a></div>
                         <div class="course-info" style="margin-top:100px;"><a><%=item.grade%></a></div>
+                        <div class="course-info"><a><%=item.subject%></a></div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                     </div>
@@ -60,40 +61,37 @@
                 <div class="mod" style="display:none;">
                     <div class="box" style="background:#CFE6E5;">
                         <label>科目：</label>
-                        <select>
-                            <option>语文</option>
-                            <option>数学</option>
-                            <option>英语</option>
-                            <option>物理</option>
+                        <select onchange="Sel()" id = "subjectSelect">
+                            <option value="不限">不限</option>
+                            <option value="语文">语文</option>
+                            <option value="数学">数学</option>
+                            <option value="英语">英语</option>
+                            <option value="物理">物理</option>
                         </select>
                         <label>年级：</label>
-                        <select>
-                            <option>高一</option>
-                            <option>高二</option>
-                            <option>高三</option>
+                        <select onchange="Sel()" id = "classSelect">
+                            <option value="不限">不限</option>
+                            <option value="高一">高一</option>
+                            <option value="高二">高二</option>
+                            <option value="高三">高三</option>
                         </select>
                     </div>
 
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-                        <div class="course-title"><a>圆锥曲线</a></div>
-                        <div class="course-info"><a>10课时</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>高一</a></div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
-                    </div>
+                    <%if(allCourse.length == 0){%>
+                    <h style="text-align: center;margin:10px">没有课程</h>
+                    <%}allCourse.forEach(function (item) { %>
 
-                    <div class="box">
+                    <div class="box boxSel">
                         <img src="img/picture.jpg"/>
 
-                        <div class="course-title"><a>圆锥曲线</a></div>
-                        <div class="course-info"><a>10课时</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>高一</a></div>
+                        <div class="course-title"><a><%=item.seriesName%></a></div>
+                        <div class="course-info"><a><%=item.number%></a></div>
+                        <div class="course-info" style="margin-top:100px;"><a class="grade"><%=item.grade%></a></div>
+                        <div class="course-info"><a class="subject"><%=item.subject%></a></div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
-                        <div class="course-time"><a>截止时间：2017-7-14</a>&nbsp;&nbsp;&nbsp;<a>22:00</a></div>
                     </div>
+                    <%})%>
                 </div>
 
                 <div class="mod" style="border:1px solid transparent; display:none;">
@@ -204,6 +202,38 @@
 //    function $(id) {
 //        return typeof id === 'string' ? document.getElementById(id) : id;
 //    }
+    var boxList = document.getElementsByClassName("boxSel")
+
+    function Sel() {
+
+        var classSelect = document.getElementById("classSelect").value;
+        var subjectSelect = document.getElementById("subjectSelect").value;
+
+        console.log("123")
+        console.log(" subject:"+subjectSelect+" grade:"+classSelect)
+        console.log("123")
+        console.log(boxList.length)
+        for(var i=0;i<boxList.length;i++)
+        {
+            //console.log(boxList[i])
+            var subject = boxList[i].getElementsByClassName("subject")[0].text;
+            var grade = boxList[i].getElementsByClassName("grade")[0].text;
+            console.log(" subjectSelect:"+subjectSelect+" classSelect:"+classSelect)
+            console.log(" subject:"+subject+" grade:"+grade)
+            if((classSelect == "不限" || classSelect == grade) &&
+                (subjectSelect == "不限" || subjectSelect == subject)){
+                $(boxList[i]).show()
+                //console.log("show")
+            }
+            else
+            {
+                $(boxList[i]).hide()
+               // console.log("hide")
+            }
+        }
+
+    }
+
     window.onload = function () {
         var titles = document.getElementById("right-guide").getElementsByTagName('li');
         var divs = document.getElementById("right-content").getElementsByClassName('mod');

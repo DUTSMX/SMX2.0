@@ -46,15 +46,7 @@ router.get('/student_detail',function(req,res,next){
 });
 
 
-<<<<<<< HEAD
 
-
-/**
- * 我的课程
- */
-
-=======
->>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
     var sql = "SELECT t.class, a.userName ,a.userId ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -68,13 +60,7 @@ router.get('/teacher_detail',function(req,res,next){
     })
 });
 
-<<<<<<< HEAD
 
-/**
- * 学生端
- */
-=======
->>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 router.get('/student',function(req,res,next){
     var studentId = 34;
     student.findOne({'where':{studentId:34}}).then(function (student) {
@@ -119,8 +105,7 @@ router.get('/student',function(req,res,next){
         })
     })
 });
-<<<<<<< HEAD
-=======
+
 /*
 //所有课程
 router.get('/student_allCourse',function (req, res, next) {
@@ -207,7 +192,6 @@ router.get('/course_re',function(req,res,next){
 });
 */
 
->>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 
 
 
@@ -283,11 +267,7 @@ router.get('/teacher_re',function(req,res,next){
 });
 
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 router.post("/editInfo",function (req,res) {
     console.log("123"+JSON.stringify(req.body));
     user.update({
@@ -350,7 +330,7 @@ router.get('/education',function(req,res){
         var sql = "SELECT userId,userName " +
             "FROM account where role = 1 order by userName"
         db.sequelize.query(sql).then(function (studentList) {
-            var sql = "SELECT s.templateId,s.seriesName,COUNT(j.studentId) as studentNumber " +
+            var sql = "SELECT s.templateId,s.subject,s.grade,s.seriesName,COUNT(j.studentId) as studentNumber " +
                 "from seriesTemplate s " +
                 //"JOIN student st ON st.studentId = j.studentId " +
                 "JOIN joinSeries j ON s.templateId = j.templateId " +
