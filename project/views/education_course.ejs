@@ -41,36 +41,20 @@
             <div class="right-content" id="right-content">
                 <div class="mod">
 
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>圆锥曲线</a></div>
-                        <div class="course-info"><a>10课时</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>高一</a></div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                    </div>
+                    <%if(allCourse.length == 0){%>
+                    <h style="text-align: center;margin:10px">没有课程</h>
+                    <%}allCourse.forEach(function (item) { %>
 
                     <div class="box">
                         <img src="img/picture.jpg"/>
 
-                        <div class="course-title"><a>等比函数</a></div>
-                        <div class="course-info"><a>8课时</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>高二</a></div>
+                        <div class="course-title"><a><%=item.seriesName%></a></div>
+                        <div class="course-info"><a><%=item.number%></a></div>
+                        <div class="course-info" style="margin-top:100px;"><a><%=item.grade%></a></div>
                         <div class="pro-bac"></div>
                         <div class="pro-fro"></div>
                     </div>
-
-                    <div class="box">
-                        <img src="img/picture.jpg"/>
-
-                        <div class="course-title"><a>霍夫曼树</a></div>
-                        <div class="course-info"><a>10课时</a></div>
-                        <div class="course-info" style="margin-top:100px;"><a>高三</a></div>
-                        <div class="pro-bac"></div>
-                        <div class="pro-fro"></div>
-                    </div>
-
+                    <%})%>
                 </div>
 
                 <div class="mod" style="display:none;">
@@ -117,19 +101,19 @@
                         <div class="basic-title"><span>基本信息</span></div>
                         <form>
                             <label>名称</label>
-                            <input type="text" />
+                            <input id="courseSeriesName" type="text" />
                         </form>
                         <form>
                             <label>年级</label>
-                            <input type="text" />
+                            <input id="courseSeriesGrade" type="text" />
                         </form>
                         <form>
                             <label>课时</label>
-                            <input type="text" />
+                            <input id="courseSeriesNumber" type="text" />
                         </form>
                         <label><span>介绍</span></label>
                         <form style="margin-left:20px;">
-                            <textarea rows="8" cols="36"></textarea>
+                            <textarea rows="8" cols="36" id="courseSeriesIntro"></textarea>
                         </form>
                     </div>
 
@@ -147,11 +131,15 @@
                             <label>课时三</label>
                             <input type="text" placeholder="年/月/日"/>
                         </form>
-                        <input class="sub" type="submit">
                     </div>
+                    <button class="sub" onclick="addCourseSeries()">提交</button>
                 </div>
 
                 <div class="mod" style="display:none;">
+                    <%if(postCourse.length == 0){%>
+                        <h style="margin:10px;text-align: center">当前没有申请中的课程</h><br>
+                    <%}else{
+                        postCourse.forEach(function (item) { %>
                     <div style="background:white; height:500px; padding-top:40px;">
                         <table>
                             <tbody>
@@ -199,21 +187,26 @@
                             </tbody>
                         </table>
                     </div>
-
+                    <%})
+                    }%>
                 </div>
 
             </div>
         </div>
     </div>
 </div>
+<p id="hint"></p>
 </body>
+<script src="javascripts/jquery.min.js">
+</script>
 <script>
-    function $(id) {
-        return typeof id === 'string' ? document.getElementById(id) : id;
-    }
+
+//    function $(id) {
+//        return typeof id === 'string' ? document.getElementById(id) : id;
+//    }
     window.onload = function () {
-        var titles = $('right-guide').getElementsByTagName('li');
-        var divs = $('right-content').getElementsByClassName('mod');
+        var titles = document.getElementById("right-guide").getElementsByTagName('li');
+        var divs = document.getElementById("right-content").getElementsByClassName('mod');
 
         for (var i = 0; i < titles.length; i++) {
             titles[i].id = i;
@@ -227,7 +220,36 @@
             }
         }
     }
-    router.get('/course_recommened',function (req,res) {
-        res.render('course_recommened',{})
-    })
+    function addCourseSeries() {
+        var courseSeriesName= $("#courseSeriesName").val();
+        var courseSeriesIntro=$("#courseSeriesIntro").val();
+        var courseSeriesGrade=$("#courseSeriesGrade").val();
+        var courseSeriesNumber=$("#courseSeriesNumber").val();
+//        var courseSeriesCourseName=[];
+//        for(var i=0;i<courseSeriesNumber;i++){
+//            courseSeriesCourseName.push($(".courseSeriesCourseName")[i].value);
+//        }
+        var data={
+            courseSeriesName:courseSeriesName,
+            courseSeriesIntro:courseSeriesIntro,
+            courseSeriesGrade:courseSeriesGrade,
+            courseSeriesNumber:courseSeriesNumber
+            //courseSeriesCourseName:courseSeriesCourseName
+        }
+        console.log("data:"+JSON.stringify(data));
+        $.post("addTemplate",data,function (ret) {
+            console.log(ret)
+            $("#hint").text(ret);
+            var titles = document.getElementById("right-guide").getElementsByTagName('li');
+            var divs = document.getElementById("right-content").getElementsByClassName('mod');
+            for (var j = 0; j < titles.length; j++) {
+                titles[j].className = ' ';
+                divs[j].style.display = 'none';
+            }
+            titles[0].className = 'select';
+            divs[0].style.display = 'block';
+            //location.href=""
+            window.location.reload();
+        })
+    }
 </script>

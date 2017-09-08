@@ -46,19 +46,35 @@ router.get('/student_detail',function(req,res,next){
 });
 
 
+<<<<<<< HEAD
+
+
+/**
+ * 我的课程
+ */
+
+=======
+>>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
-    var sql = "SELECT t.class, a.userName ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
+    var sql = "SELECT t.class, a.userName ,a.userId ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
         "FROM  teacher t " +
         "JOIN account a ON a.userId = t.userId  " +
         "WHERE t.teacherId = " + teacherId;
     db.sequelize.query(sql).then(function (ret) {
-        console.log(JSON.stringify(ret));
-        console.log(JSON.stringify({data:ret[0][0]}));
+        //console.log(JSON.stringify(ret));
+        //console.log(JSON.stringify({data:ret[0][0]}));
         res.render('teacher_detail',{data:ret[0][0]});
     })
 });
 
+<<<<<<< HEAD
+
+/**
+ * 学生端
+ */
+=======
+>>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 router.get('/student',function(req,res,next){
     var studentId = 34;
     student.findOne({'where':{studentId:34}}).then(function (student) {
@@ -103,6 +119,8 @@ router.get('/student',function(req,res,next){
         })
     })
 });
+<<<<<<< HEAD
+=======
 /*
 //所有课程
 router.get('/student_allCourse',function (req, res, next) {
@@ -189,6 +207,7 @@ router.get('/course_re',function(req,res,next){
 });
 */
 
+>>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 
 
 
@@ -253,65 +272,7 @@ router.get('/teacher',function(req,res,next){
         })
     })
 });
-/*
-//已完成
-router.get('/teacher_finishCourse',function (req, res, next) {
-    var teacherId = 37;
-    teacher.findOne({'where':{teacherId:37}}).then(function (teacher) {
-        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
-            var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
-                "FROM courseSeries c " +
-                "JOIN account a ON c.courseSeriesTeacher = a.userId " +
-                "WHERE c.endDate < now() and c.courseSeriesTeacher =" + teacher.userId;
-            db.sequelize.query(sql).then(function (FinishCourse) {
-                console.log(sql);
-                console.log('userId:' + teacher.userId)
-                console.log('finishCourse:' + JSON.stringify(FinishCourse[0]))
-                res.render('teacher_course',{FinishCourse:FinishCourse[0]});
-            })
-        })
-    })
 
-})
-
-//进行中
-router.get('/teacher_nowCourse',function (req, res, next) {
-    var teacherId = 37;
-    teacher.findOne({'where':{teacherId:37}}).then(function (teacher) {
-        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
-            var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
-                "FROM courseSeries c " +
-                "JOIN account a ON c.courseSeriesTeacher = a.userId "+
-                "WHERE c.endDate > now() and c.courseSeriesTeacher ="+teacher.userId;
-            db.sequelize.query(sql).then(function (NowCourse) {
-                console.log(sql);
-                console.log('userId:' + teacher.userId)
-                console.log('nowCourse:' + JSON.stringify(NowCourse[0]))
-                res.render('teacher_course',{NowCourse:NowCourse[0]});
-            })
-        })
-    })
-})
-
-//申请中
-router.get('/teacher_postCourse',function (req, res, next) {
-    var teacherId = 37;
-    teacher.findOne({'where':{teacherId:37}}).then(function (teacher) {
-        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
-            var sql = "SELECT j.joinSeriesId,s.seriesName,studentId,hopeTeacher,hopeClassType,hopeTime,other " +
-                    "FROM joinSeries j " +
-                    "JOIN seriesTemplate s ON s.templateId = j.templateId " +
-                    "WHERE process = 0 and j.hopeTeacher='"+user.userName+"'";
-            db.sequelize.query(sql).then(function (PostCourse) {
-                console.log(sql);
-                console.log('userId:' + teacher.userId)
-                console.log('postCourse:' + JSON.stringify(PostCourse[0]))
-                res.render('teacher_course',{PostCourse:PostCourse[0]});
-            })
-        })
-    })
-})
-*/
 router.get('/teacher_detail',function(req,res,next){
     res.render('teacher_detail')
 });
@@ -322,12 +283,18 @@ router.get('/teacher_re',function(req,res,next){
 });
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 9ac5716edab4c3dcad2798f8968c764c021a3d9f
 router.post("/editInfo",function (req,res) {
     console.log("123"+JSON.stringify(req.body));
     user.update({
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
         userAddress:req.body.address,
+        userHeadUrl:req.body.userHeadUrl,
     },{'where':{userId:req.body.userId}}).then(function (data) {
         student.update({
             grade:req.body.grade,
@@ -342,23 +309,35 @@ router.post("/changeInfo",function (req,res) {
     user.update({
         userName:req.body.userName,
         phoneNumber:req.body.phoneNumber,
-        userAddress:req.body.address,
-    },{'where':{userId:87}}).then(function (data) {
+        userAddress:req.body.userAddress,
+        userHeadUrl:req.body.userHeadUrl,
+    },{'where':{userId:req.body.userId}}).then(function (data) {
         teacher.update({
-            class:req.body.grade,
-            college:req.body.school,
-        },{'where':{userId:87}}).then(
+            class:req.body.class,
+            college:req.body.college,
+        },{'where':{userId:req.body.userId}}).then(
             res.send("123")
         )
     })
 });
-router.post("/imgInfo",function (req,res) {
+router.post("/stuimgInfo",function (req,res) {
     console.log("111");
     //console.log(JSON.stringify(req.body))
     user.update({
         userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
         userBackIdHeadUrl: req.body.userBackIdHeadUrl,
-    }, {'where': {userId:34 }}).then(function (data) {
+    }, {'where': {userId:req.body.userId }}).then(function (data) {
+        res.send("修改成功")
+
+    })
+});
+router.post("/teachimgInfo",function (req,res) {
+    console.log("111");
+    //console.log(JSON.stringify(req.body))
+    user.update({
+        userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
+        userBackIdHeadUrl: req.body.userBackIdHeadUrl,
+    }, {'where': {userId:req.body.userId }}).then(function (data) {
         res.send("修改成功")
 
     })
@@ -366,9 +345,47 @@ router.post("/imgInfo",function (req,res) {
 /*
  *教务
  */
-router.get('/education',function(req,res,next){
-    res.render('education_course')
+router.get('/education',function(req,res){
+    series.seriesTemplate.findAll().then(function (data) {
+        var sql = "SELECT userId,userName " +
+            "FROM account where role = 1 order by userName"
+        db.sequelize.query(sql).then(function (studentList) {
+            var sql = "SELECT s.templateId,s.seriesName,COUNT(j.studentId) as studentNumber " +
+                "from seriesTemplate s " +
+                //"JOIN student st ON st.studentId = j.studentId " +
+                "JOIN joinSeries j ON s.templateId = j.templateId " +
+                "where j.process = 0 group by templateId";
+            db.sequelize.query(sql).then(function (postCourse) {
+                console.log("post:"+JSON.stringify({allCourse:data,student:studentList[0],postCourse:postCourse[0]}))
+                res.render('education_course',{allCourse:data,studentList:studentList[0],postCourse:postCourse[0]})
+            })
+        })
+    })
 });
+router.post('/addTemplate',function (req, res) {
+    var courseSeriesName = req.body.courseSeriesName;
+    var courseSeriesGrade = req.body.courseSeriesGrade;
+    var courseSeriesNumber = req.body.courseSeriesNumber;
+    var courseSeriesIntro = req.body.courseSeriesIntro;
+    var courseSeriesCourseName = req.body.courseSeriesCourseName;
+    console.log("courseSeriesCourseName:"+JSON.stringify(courseSeriesCourseName));
+    series.seriesTemplate.create({
+        seriesName:courseSeriesName,
+        seriesIntro:courseSeriesIntro,
+        grade:courseSeriesGrade,
+        number:courseSeriesNumber,
+        courseName:JSON.stringify(courseSeriesCourseName)
+    }).then(function (data) {
+        console.log("data:"+JSON.stringify(data));
+        res.send("添加成功");
+    }).catch(function (err) {
+        console.log("err:"+err);
+        res.send(err);
+    })
+})
+
+
+
 router.get('/education_detail',function(req,res,next){
     res.render('education_detail')
 });
