@@ -44,8 +44,18 @@ router.get('/student_detail',function(req,res,next){
         res.render('student_detail',{data:ret[0][0]});
     })
 });
-
-
+router.get('/education_detail',function(req,res,next){
+    var userId = 1;
+    var sql = "SELECT a.userName ,a.userId ,a.phoneNumber ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
+        "FROM  joinreceptionshop j " +
+        "JOIN account a ON a.userId = j.userId  " +
+        "WHERE j.userId = " + userId;
+    db.sequelize.query(sql).then(function (ret) {
+        //console.log(JSON.stringify(ret));
+        //console.log(JSON.stringify({data:ret[0][0]}));
+        res.render('education_detail',{data:ret[0][0]});
+    })
+});
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
     var sql = "SELECT t.class, a.userName ,a.userId ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -338,6 +348,16 @@ router.post("/editInfo",function (req,res) {
         )
     })
 });
+router.post("/modifyInfo",function (req,res) {
+    console.log("123"+JSON.stringify(req.body));
+    user.update({
+        userName:req.body.userName,
+        phoneNumber:req.body.phoneNumber,
+        userHeadUrl:req.body.userHeadUrl,
+    },{'where':{userId:req.body.userId}}).then(
+            res.send("123")
+        )
+});
 router.post("/changeInfo",function (req,res) {
     console.log(JSON.stringify(req.body));
     user.update({
@@ -374,6 +394,16 @@ router.post("/teachimgInfo",function (req,res) {
     }, {'where': {userId:req.body.userId }}).then(function (data) {
         res.send("修改成功")
 
+    })
+});
+router.post("/eduimgInfo",function (req,res) {
+    console.log("111");
+    //console.log(JSON.stringify(req.body))
+    user.update({
+        userFrontIdHeadUrl: req.body.userFrontIdHeadUrl,
+        userBackIdHeadUrl: req.body.userBackIdHeadUrl,
+    }, {'where': {userId:req.body.userId }}).then(function (data) {
+        res.send("修改成功")
     })
 });
 /*
@@ -454,7 +484,7 @@ router.post("/education_teacherchoose",function (req,res) {
         )
     })*/
     res.res("1243");
-})
+});
 
 
 
