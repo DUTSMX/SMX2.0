@@ -44,6 +44,7 @@ router.get('/student_detail',function(req,res,next){
         res.render('student_detail',{data:ret[0][0]});
     })
 });
+<<<<<<< HEAD
 router.get('/education_detail',function(req,res,next){
     var userId = 1;
     var sql = "SELECT a.userName ,a.userId ,a.phoneNumber ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -56,6 +57,11 @@ router.get('/education_detail',function(req,res,next){
         res.render('education_detail',{data:ret[0][0]});
     })
 });
+=======
+
+
+
+>>>>>>> ac0350fb8ec4fe35909fe9a005928b809c998ed9
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
     var sql = "SELECT t.class, a.userName ,a.userId ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -68,6 +74,7 @@ router.get('/teacher_detail',function(req,res,next){
         res.render('teacher_detail',{data:ret[0][0]});
     })
 });
+
 
 router.get('/student',function(req,res,next){
     var studentId = 34;
@@ -113,6 +120,7 @@ router.get('/student',function(req,res,next){
         })
     })
 });
+
 /*
 //所有课程
 router.get('/student_allCourse',function (req, res, next) {
@@ -207,7 +215,7 @@ router.get('/course_re',function(req,res,next){
 * res:{allCourse:[]}
 * */
 router.get('/teacher_re',function (req,res,next) {
-    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.courseSeriesSubject, c.courseSeriesGrade,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
         "FROM courseSeries c " +
         "JOIN account a ON c.courseSeriesTeacher = a.userId "+
         "order by userName,time";
@@ -220,7 +228,7 @@ router.get('/teacher_re',function (req,res,next) {
 
 
 router.get('/course_re',function (req,res,next) {
-    var sql = "select c.courseSeriesId,c.courseSeriesName,c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
+    var sql = "select c.courseSeriesId,c.courseSeriesName,c.courseSeriesSubject, c.courseSeriesGrade, c.startDate,a.userName as teacher,c.endDate,c.time,c.room, a.userName " +
         "FROM courseSeries c " +
         "JOIN account a ON c.courseSeriesTeacher = a.userId "+
         "order by userName,time";
@@ -263,65 +271,7 @@ router.get('/teacher',function(req,res,next){
         })
     })
 });
-/*
-//已完成
-router.get('/teacher_finishCourse',function (req, res, next) {
-    var teacherId = 37;
-    teacher.findOne({'where':{teacherId:37}}).then(function (teacher) {
-        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
-            var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
-                "FROM courseSeries c " +
-                "JOIN account a ON c.courseSeriesTeacher = a.userId " +
-                "WHERE c.endDate < now() and c.courseSeriesTeacher =" + teacher.userId;
-            db.sequelize.query(sql).then(function (FinishCourse) {
-                console.log(sql);
-                console.log('userId:' + teacher.userId)
-                console.log('finishCourse:' + JSON.stringify(FinishCourse[0]))
-                res.render('teacher_course',{FinishCourse:FinishCourse[0]});
-            })
-        })
-    })
 
-})
-
-//进行中
-router.get('/teacher_nowCourse',function (req, res, next) {
-    var teacherId = 37;
-    teacher.findOne({'where':{teacherId:37}}).then(function (teacher) {
-        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
-            var sql = "SELECT c.courseSeriesId,c.courseSeriesName, a.userName as teacher, c.startDate, c.endDate, c.time, c.room "+
-                "FROM courseSeries c " +
-                "JOIN account a ON c.courseSeriesTeacher = a.userId "+
-                "WHERE c.endDate > now() and c.courseSeriesTeacher ="+teacher.userId;
-            db.sequelize.query(sql).then(function (NowCourse) {
-                console.log(sql);
-                console.log('userId:' + teacher.userId)
-                console.log('nowCourse:' + JSON.stringify(NowCourse[0]))
-                res.render('teacher_course',{NowCourse:NowCourse[0]});
-            })
-        })
-    })
-})
-
-//申请中
-router.get('/teacher_postCourse',function (req, res, next) {
-    var teacherId = 37;
-    teacher.findOne({'where':{teacherId:37}}).then(function (teacher) {
-        user.findOne({'where':{userId:teacher.userId}}).then(function (user) {
-            var sql = "SELECT j.joinSeriesId,s.seriesName,studentId,hopeTeacher,hopeClassType,hopeTime,other " +
-                    "FROM joinSeries j " +
-                    "JOIN seriesTemplate s ON s.templateId = j.templateId " +
-                    "WHERE process = 0 and j.hopeTeacher='"+user.userName+"'";
-            db.sequelize.query(sql).then(function (PostCourse) {
-                console.log(sql);
-                console.log('userId:' + teacher.userId)
-                console.log('postCourse:' + JSON.stringify(PostCourse[0]))
-                res.render('teacher_course',{PostCourse:PostCourse[0]});
-            })
-        })
-    })
-})
-*/
 router.get('/teacher_detail',function(req,res,next){
     res.render('teacher_detail')
 });
@@ -330,6 +280,7 @@ router.get('/teacher_detail',function(req,res,next){
 router.get('/teacher_re',function(req,res,next){
     res.render('teacher_re')
 });
+
 
 
 router.post("/editInfo",function (req,res) {
@@ -409,9 +360,47 @@ router.post("/eduimgInfo",function (req,res) {
 /*
  *教务
  */
-router.get('/education',function(req,res,next){
-    res.render('education_course')
+router.get('/education',function(req,res){
+    series.seriesTemplate.findAll().then(function (data) {
+        var sql = "SELECT userId,userName " +
+            "FROM account where role = 1 order by userName"
+        db.sequelize.query(sql).then(function (studentList) {
+            var sql = "SELECT s.templateId,s.subject,s.grade,s.seriesName,COUNT(j.studentId) as studentNumber " +
+                "from seriesTemplate s " +
+                //"JOIN student st ON st.studentId = j.studentId " +
+                "JOIN joinSeries j ON s.templateId = j.templateId " +
+                "where j.process = 0 group by templateId";
+            db.sequelize.query(sql).then(function (postCourse) {
+                console.log("post:"+JSON.stringify({allCourse:data,student:studentList[0],postCourse:postCourse[0]}))
+                res.render('education_course',{allCourse:data,studentList:studentList[0],postCourse:postCourse[0]})
+            })
+        })
+    })
 });
+router.post('/addTemplate',function (req, res) {
+    var courseSeriesName = req.body.courseSeriesName;
+    var courseSeriesGrade = req.body.courseSeriesGrade;
+    var courseSeriesNumber = req.body.courseSeriesNumber;
+    var courseSeriesIntro = req.body.courseSeriesIntro;
+    var courseSeriesCourseName = req.body.courseSeriesCourseName;
+    console.log("courseSeriesCourseName:"+JSON.stringify(courseSeriesCourseName));
+    series.seriesTemplate.create({
+        seriesName:courseSeriesName,
+        seriesIntro:courseSeriesIntro,
+        grade:courseSeriesGrade,
+        number:courseSeriesNumber,
+        courseName:JSON.stringify(courseSeriesCourseName)
+    }).then(function (data) {
+        console.log("data:"+JSON.stringify(data));
+        res.send("添加成功");
+    }).catch(function (err) {
+        console.log("err:"+err);
+        res.send(err);
+    })
+})
+
+
+
 router.get('/education_detail',function(req,res,next){
     res.render('education_detail')
 });

@@ -39,11 +39,11 @@
             </div>
             <div class="ziliao" id="reinfo" style="display: block">
                 <ul>
-                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" /></li>
-                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="<%=data.grade%>" /></li>
-                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.school%>" /></li>
-                    <li>联系方式：<input placeholder="<%=data.phoneNumber%>" name="shoujihao" id="person-phoneNumber" maxlength="11" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
-                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" /></li>
+                    <li>姓名：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-name" placeholder="<%=data.userName%>" value="<%=data.userName%>"/></li>
+                    <li>年级：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-grade" placeholder="<%=data.grade%>" value="<%=data.grade%>"/></li>
+                    <li>学校：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-school" placeholder="<%=data.school%>" value="<%=data.school%>" /></li>
+                    <li>联系方式：<input name="shoujihao" id="person-phoneNumber" maxlength="11" placeholder="<%=data.phoneNumber%>" value="<%=data.phoneNumber%>" onInput="clearNoNum(this)" onblur="recheck(this.value)"/></li>
+                    <li>住址：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="person-address" placeholder="<%=data.userAddress%>" value="<%=data.userAddress%>" /></li>
                 </ul>
             </div>
             <div class="photo">
@@ -279,3 +279,5 @@
     }
 
 </script>
+
+<!--测试git-->
