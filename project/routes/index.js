@@ -44,7 +44,6 @@ router.get('/student_detail',function(req,res,next){
         res.render('student_detail',{data:ret[0][0]});
     })
 });
-<<<<<<< HEAD
 router.get('/education_detail',function(req,res,next){
     var userId = 1;
     var sql = "SELECT a.userName ,a.userId ,a.phoneNumber ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
@@ -57,11 +56,6 @@ router.get('/education_detail',function(req,res,next){
         res.render('education_detail',{data:ret[0][0]});
     })
 });
-=======
-
-
-
->>>>>>> ac0350fb8ec4fe35909fe9a005928b809c998ed9
 router.get('/teacher_detail',function(req,res,next){
     var teacherId = 37;
     var sql = "SELECT t.class, a.userName ,a.userId ,a.userAge ,t.college ,t.SumScore ,a.phoneNumber ,a.userAddress ,a.userHeadUrl ,a.userFrontIdHeadUrl ,a.userBackIdHeadUrl " +
